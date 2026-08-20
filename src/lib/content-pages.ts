@@ -4,7 +4,7 @@ import { remark } from 'remark';
 import remarkGfm from 'remark-gfm';
 import html from 'remark-html';
 
-const ARCHIVE_DIR = path.join(process.cwd(), '..', 'kupit-beton-v-zhukovskom');
+const CONTENT_DIR = path.join(process.cwd(), 'src', 'content', 'pages');
 
 export type ContentPageRef = {
   slug: string;
@@ -119,7 +119,7 @@ export const allContentPageRefs = [
 ];
 
 function readRaw(file: string): string {
-  return fs.readFileSync(path.join(ARCHIVE_DIR, file), 'utf-8');
+  return fs.readFileSync(path.join(CONTENT_DIR, file), 'utf-8');
 }
 
 function pick(raw: string, patterns: RegExp[], fallback = ''): string {
