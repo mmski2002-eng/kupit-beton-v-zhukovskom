@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+  <title id="title">Морозостойкий бетон</title>
+  <desc id="desc">Временная SVG-заглушка зимней заливки морозостойкого бетона</desc>
+  <rect width="960" height="540" rx="24" fill="#FFFFFF"/>
+  <path d="M0 316h960v224H0z" fill="#F8F3E5"/>
+  <g stroke="#1A4387" stroke-width="5" stroke-linecap="round" opacity=".45">
+    <path d="M128 96v72M92 132h72M106 106l44 52M150 106l-44 52"/>
+    <path d="M780 92v72M744 128h72M758 102l44 52M802 102l-44 52"/>
+    <path d="M606 156v56M578 184h56M586 164l40 40M626 164l-40 40"/>
+  </g>
+  <path d="M174 376h610v60H174z" fill="#12213A"/>
+  <path d="M210 338h540v42H210z" fill="#FAB800"/>
+  <path d="M654 222h132v58H654z" fill="#1A4387"/>
+  <path d="M688 280c-42 24-116 54-224 92" stroke="#FAB800" stroke-width="16" stroke-linecap="round"/>
+  <circle cx="686" cy="304" r="24" fill="#12213A" stroke="#FAB800" stroke-width="7"/>
+  <circle cx="770" cy="304" r="24" fill="#12213A" stroke="#FAB800" stroke-width="7"/>
+  <text x="76" y="72" fill="#12213A" font-family="Arial, sans-serif" font-size="28" font-weight="700">Морозостойкий бетон F150–F300</text>
+</svg>

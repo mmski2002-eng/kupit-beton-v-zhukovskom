@@ -1,69 +1,73 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import type { Metadata } from 'next';
+import { pageMetadata } from '@/lib/metadata';
+import { Header } from '@/components/Header';
+import { Hero } from '@/components/Hero';
+import { TrustBar } from '@/components/TrustBar';
+import { Calculator } from '@/components/Calculator';
+import { PriceCatalog } from '@/components/PriceCatalog';
+import { Delivery } from '@/components/Delivery';
+import { Services } from '@/components/Services';
+import { Guarantees } from '@/components/Guarantees';
+import { HowWeWork } from '@/components/HowWeWork';
+import { AboutFactory } from '@/components/AboutFactory';
+import { Cases } from '@/components/Cases';
+import { Reviews } from '@/components/Reviews';
+import { B2BBlock } from '@/components/B2BBlock';
+import { BlogTeaser } from '@/components/BlogTeaser';
+import { FAQ } from '@/components/FAQ';
+import { FinalCTA } from '@/components/FinalCTA';
+import { Footer } from '@/components/Footer';
 
-export default function Home() {
+export const metadata: Metadata = pageMetadata({
+  title: 'Купить бетон в Жуковском с доставкой — от 4 150 ₽/м³',
+  description:
+    'Бетон от завода-производителя ООО «ПСК «Прогресс» в Жуковском: марки М100–М600, от 1 м³, доставка в день заказа, паспорт ГОСТ. Тел. +7 (499) 111-72-62.',
+  path: '/',
+});
+
+export default function HomePage() {
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
+    <>
+      <Header />
+
+      <main>
+        <Hero
+          title="Заводской бетон с доставкой по Жуковскому"
+          subtitle="Минимальный заказ 1 м³ · привезём в день обращения · паспорт качества ГОСТ к каждой партии"
         />
-        <div className={styles.intro}>
-          <h1>
-            To get started, edit the{" "}
-            <code className={styles.code}>page.tsx</code> file.
-          </h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+
+        <TrustBar />
+
+        <Calculator />
+
+        <PriceCatalog footerLink={{ label: 'Смотреть все марки и цены →', href: '/tovarnyy-beton/' }} />
+
+        <Delivery />
+
+        <Services />
+
+        <Guarantees title="Гарантии завода" />
+
+        <HowWeWork />
+
+        <AboutFactory />
+
+        <div id="kejsy">
+          <Cases />
         </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+
+        <Reviews />
+
+        <B2BBlock />
+
+        <BlogTeaser slugs={['kak-rasschitat-obem-betona', 'kakoy-beton-dlya-fundamenta', 'skolko-stoit-kub-betona']} />
+
+        <FAQ />
+
+        <FinalCTA />
       </main>
-    </div>
+
+      <Footer />
+    </>
   );
 }

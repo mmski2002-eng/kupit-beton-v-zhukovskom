@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+  <title id="title">Бетонный пол или стяжка</title>
+  <desc id="desc">Временная SVG-заглушка бетонного пола и стяжки</desc>
+  <rect width="960" height="540" rx="24" fill="#F8F3E5"/>
+  <path d="M120 330h720l-94 138H210z" fill="#12213A"/>
+  <path d="M160 344h640M198 398h566M236 448h492" stroke="#FAB800" stroke-opacity=".55" stroke-width="6"/>
+  <path d="M284 330 220 468M424 330 390 468M552 330l28 138M686 330l70 138" stroke="#FFFFFF" stroke-opacity=".18" stroke-width="5"/>
+  <rect x="160" y="116" width="640" height="214" rx="18" fill="#FFFFFF"/>
+  <path d="M206 274h462" stroke="#FAB800" stroke-width="18" stroke-linecap="round"/>
+  <path d="M236 236h430" stroke="#12213A" stroke-width="12" stroke-linecap="round"/>
+  <rect x="670" y="212" width="104" height="64" rx="14" fill="#1A4387"/>
+  <circle cx="696" cy="292" r="20" fill="#12213A" stroke="#FAB800" stroke-width="6"/>
+  <circle cx="752" cy="292" r="20" fill="#12213A" stroke="#FAB800" stroke-width="6"/>
+  <text x="120" y="78" fill="#12213A" font-family="Arial, sans-serif" font-size="28" font-weight="700">Пол, стяжка, площадка</text>
+</svg>

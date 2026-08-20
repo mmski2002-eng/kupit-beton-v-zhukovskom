@@ -1,0 +1,51 @@
+.inner {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 40px;
+  align-items: start;
+}
+
+.lead {
+  margin-top: 12px;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 15.5px;
+}
+
+.contacts {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 26px;
+}
+
+.label {
+  display: block;
+  font-size: var(--fs-meta);
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.value {
+  font: 600 16px / 1.35 var(--font-heading);
+  color: #fff;
+}
+
+a.value:hover {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+.form {
+  padding: 26px;
+  background: var(--color-bg);
+  border-radius: var(--radius-lg);
+}
+
+@media (max-width: 900px) {
+  .inner {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .form {
+    padding: 18px;
+  }
+}

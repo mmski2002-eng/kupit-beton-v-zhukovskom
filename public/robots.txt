@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://kupit-beton-v-zhukovskom.ru/sitemap.xml

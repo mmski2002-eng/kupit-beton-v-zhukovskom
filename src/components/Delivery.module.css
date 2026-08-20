@@ -1,0 +1,32 @@
+.delivery {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  align-items: start;
+}
+
+.cities {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.cityChip {
+  padding: 7px 15px;
+  border-radius: var(--radius-pill);
+  background: var(--color-bg-alt);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-primary);
+  font: 500 14px / 1.2 var(--font-body);
+}
+
+.free :global(.price) {
+  color: var(--color-text-primary);
+  background: var(--color-accent-light);
+}
+
+@media (max-width: 900px) {
+  .delivery {
+    grid-template-columns: 1fr;
+  }
+}

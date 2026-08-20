@@ -1,0 +1,54 @@
+.b2b {
+  display: grid;
+  grid-template-columns: 1.3fr 0.7fr;
+  gap: 36px;
+  align-items: start;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 15.5px;
+  color: var(--color-text-body);
+}
+
+.item svg {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  margin-top: 2px;
+  padding: 3px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  color: var(--color-text-primary);
+}
+
+.item b {
+  color: var(--color-text-primary);
+}
+
+.cta {
+  padding: 26px;
+  background: var(--color-bg-alt);
+  border-radius: var(--radius-lg);
+}
+
+.ctaText {
+  margin-bottom: 18px;
+  font-size: 15px;
+  color: var(--color-text-body);
+}
+
+@media (max-width: 900px) {
+  .b2b {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}

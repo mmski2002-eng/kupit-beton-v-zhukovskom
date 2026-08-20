@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+  <title id="title">Автобетоносмеситель на доставке</title>
+  <desc id="desc">Временная SVG-заглушка миксера на строительном объекте</desc>
+  <rect width="960" height="540" rx="24" fill="#F8F3E5"/>
+  <path d="M0 394h960v146H0z" fill="#12213A"/>
+  <path d="M72 394c104-68 192-96 292-86 91 9 167 62 255 54 72-7 126-52 269-44v76z" fill="#FFFFFF"/>
+  <g transform="translate(132 226)">
+    <rect x="360" y="92" width="230" height="86" rx="16" fill="#1A4387"/>
+    <path d="M400 92h112l58 86H360z" fill="#FFFFFF"/>
+    <path d="M424 116h78l32 45H390z" fill="#12213A" opacity=".22"/>
+    <rect x="96" y="116" width="312" height="62" rx="16" fill="#FAB800"/>
+    <circle cx="238" cy="110" r="88" fill="#12213A"/>
+    <circle cx="238" cy="110" r="62" fill="#F8F3E5"/>
+    <path d="M184 75c40-38 101-34 136 7M178 134c45 35 105 26 140-16" fill="none" stroke="#FAB800" stroke-width="14" stroke-linecap="round"/>
+    <rect x="38" y="146" width="118" height="32" rx="10" fill="#12213A"/>
+    <circle cx="130" cy="196" r="34" fill="#12213A" stroke="#FAB800" stroke-width="8"/>
+    <circle cx="454" cy="196" r="34" fill="#12213A" stroke="#FAB800" stroke-width="8"/>
+    <circle cx="594" cy="196" r="34" fill="#12213A" stroke="#FAB800" stroke-width="8"/>
+  </g>
+  <g fill="#1A4387" opacity=".16">
+    <rect x="82" y="116" width="118" height="170" rx="10"/>
+    <rect x="220" y="146" width="78" height="140" rx="10"/>
+  </g>
+  <text x="80" y="72" fill="#12213A" font-family="Arial, sans-serif" font-size="28" font-weight="700">Миксер на объекте</text>
+</svg>

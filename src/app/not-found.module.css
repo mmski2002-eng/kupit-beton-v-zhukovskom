@@ -1,0 +1,29 @@
+.notfound {
+  padding: 96px 0;
+}
+
+.inner {
+  max-width: 560px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.code {
+  display: block;
+  margin-bottom: 8px;
+  font: 800 72px / 1 var(--font-heading);
+  color: var(--color-accent);
+}
+
+.text {
+  margin: 16px 0 28px;
+  font-size: 15.5px;
+  color: var(--color-text-body);
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}

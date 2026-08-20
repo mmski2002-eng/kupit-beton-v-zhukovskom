@@ -1,0 +1,13 @@
+.cart {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.cartBtn {
+  padding: 11px 16px;
+  font-size: 13.5px;
+}

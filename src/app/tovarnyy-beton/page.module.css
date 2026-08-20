@@ -1,0 +1,9 @@
+.intro {
+  max-width: 880px;
+}
+
+.introText {
+  margin-bottom: 14px;
+  font-size: 15.5px;
+  color: var(--color-text-body);
+}

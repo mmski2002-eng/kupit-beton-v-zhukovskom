@@ -1,0 +1,82 @@
+.tabsNav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.tabBtn {
+  padding: 11px 20px;
+  border: none;
+  border-radius: var(--radius-pill);
+  background: var(--color-bg);
+  color: var(--color-text-primary);
+  font: 600 14px / 1 var(--font-heading);
+  cursor: pointer;
+  transition: background var(--transition), color var(--transition);
+}
+
+.tabBtn:hover {
+  background: var(--color-accent-light);
+}
+
+.tabBtnActive {
+  background: var(--color-accent);
+}
+
+.panel :global(.table-scroll) {
+  background: var(--color-bg);
+}
+
+.gradeCell b {
+  display: block;
+  color: var(--color-text-primary);
+  font: 700 16px / 1.2 var(--font-heading);
+  white-space: nowrap;
+}
+
+.gradeClass {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+}
+
+.actionCell {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.actionButtons {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.btnSm {
+  padding: 8px 14px;
+  font-size: 13px;
+}
+
+.rowLink {
+  font: 600 14px / 1 var(--font-body);
+  color: var(--color-link);
+}
+
+.rowCurrent {
+  background: var(--color-accent-light);
+  box-shadow: inset 3px 0 0 var(--color-accent);
+}
+
+.foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 18px;
+  flex-wrap: wrap;
+}
+
+.foot :global(.form-note) {
+  margin: 0;
+  max-width: 640px;
+}

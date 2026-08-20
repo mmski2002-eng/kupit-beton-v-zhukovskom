@@ -1,0 +1,68 @@
+.hero {
+  padding-bottom: 8px;
+}
+
+.heroInner {
+  max-width: 680px;
+}
+
+.heroLead {
+  margin-top: 12px;
+  font-size: 17px;
+  color: var(--color-text-body);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.card {
+  padding: 28px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-bg);
+}
+
+.card h2 {
+  margin-bottom: 18px;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.list dt {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  margin-bottom: 2px;
+}
+
+.list dd {
+  font: 600 16px/1.4 var(--font-heading);
+  color: var(--color-text-primary);
+}
+
+.note {
+  margin-top: 18px;
+  font-size: 13.5px;
+  color: var(--color-text-secondary);
+}
+
+.formSection {
+  max-width: 760px;
+}
+
+.formLead {
+  margin: 10px 0 24px;
+  color: var(--color-text-body);
+}
+
+@media (max-width: 760px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

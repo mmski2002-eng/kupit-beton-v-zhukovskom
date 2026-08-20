@@ -1,0 +1,55 @@
+.widget {
+  position: fixed;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  z-index: 100;
+}
+
+.btn {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 8px 0 0 8px;
+  color: #fff;
+  box-shadow: -2px 2px 10px var(--color-shadow);
+  transition: width var(--transition);
+}
+
+.btn svg {
+  width: 24px;
+  height: 24px;
+}
+
+.wa {
+  background: #25d366;
+}
+
+.tg {
+  background: #0088cc;
+}
+
+.btn:hover {
+  width: 56px;
+}
+
+@media (max-width: 600px) {
+  .widget {
+    top: auto;
+    bottom: 16px;
+    transform: none;
+  }
+  .btn {
+    width: 42px;
+    height: 42px;
+    border-radius: 8px;
+  }
+  .btn svg {
+    width: 21px;
+    height: 21px;
+  }
+}

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+  <title id="title">Щебень и заполнители</title>
+  <desc id="desc">Временная SVG-заглушка щебня для бетонной смеси</desc>
+  <rect width="960" height="540" rx="24" fill="#FFFFFF"/>
+  <rect x="0" y="340" width="960" height="200" fill="#F8F3E5"/>
+  <g fill="#12213A">
+    <path d="m130 388 58-74 92 34 34 92-108 34z"/>
+    <path d="m344 372 76-96 126 46 42 118-142 50z"/>
+    <path d="m630 390 54-70 98 28 58 92-110 44z"/>
+  </g>
+  <g fill="#FAB800" opacity=".75">
+    <path d="m202 318 54-40 54 56-46 68z"/>
+    <path d="m522 268 68-58 86 62-42 92z"/>
+    <path d="m694 202 66-42 80 70-70 70z"/>
+  </g>
+  <g fill="#1A4387" opacity=".86">
+    <path d="m118 244 74-84 102 74-70 78z"/>
+    <path d="m374 214 70-72 96 58-58 88z"/>
+    <path d="m718 344 42-58 72 38-44 70z"/>
+  </g>
+  <text x="80" y="78" fill="#12213A" font-family="Arial, sans-serif" font-size="28" font-weight="700">Заполнитель: гравий / гранит / щебень</text>
+</svg>

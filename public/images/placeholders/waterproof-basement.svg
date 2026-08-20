@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+  <title id="title">Водонепроницаемый бетон</title>
+  <desc id="desc">Временная SVG-заглушка заливки подвала или бассейна водонепроницаемым бетоном</desc>
+  <rect width="960" height="540" rx="24" fill="#12213A"/>
+  <path d="M0 374c150-52 275-50 416-5 147 47 304 53 544-20v191H0z" fill="#1A4387"/>
+  <path d="M172 126h616v244H172z" fill="#F8F3E5"/>
+  <path d="M218 174h524v154H218z" fill="#FFFFFF"/>
+  <path d="M250 296h460" stroke="#FAB800" stroke-width="18" stroke-linecap="round"/>
+  <path d="M306 224c42 42 42 84 0 126M480 208c48 58 48 116 0 174M654 224c42 42 42 84 0 126" fill="none" stroke="#1A4387" stroke-width="8" stroke-linecap="round"/>
+  <rect x="646" y="96" width="154" height="56" rx="14" fill="#FAB800"/>
+  <text x="676" y="132" fill="#12213A" font-family="Arial, sans-serif" font-size="22" font-weight="700">W6–W12</text>
+  <text x="76" y="72" fill="#FFFFFF" font-family="Arial, sans-serif" font-size="28" font-weight="700">Водонепроницаемый бетон</text>
+</svg>

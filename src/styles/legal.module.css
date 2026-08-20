@@ -1,0 +1,42 @@
+.legal {
+  max-width: 760px;
+}
+
+.updated {
+  margin: 8px 0 32px;
+  font-size: 14px;
+  color: var(--color-text-secondary);
+}
+
+.legal :global(h2) {
+  margin: 32px 0 12px;
+  font-size: 20px;
+}
+
+.legal :global(h2:first-of-type) {
+  margin-top: 0;
+}
+
+.legal :global(p),
+.legal :global(li) {
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--color-text-body);
+}
+
+.legal :global(p) {
+  margin-bottom: 12px;
+}
+
+.legal :global(ul),
+.legal :global(ol) {
+  margin: 0 0 12px;
+  padding-left: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.legal :global(a) {
+  color: var(--color-secondary);
+}

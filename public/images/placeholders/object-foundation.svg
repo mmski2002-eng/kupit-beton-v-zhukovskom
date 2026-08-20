@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+  <title id="title">Заливка фундамента</title>
+  <desc id="desc">Временная SVG-заглушка заливки ленточного фундамента</desc>
+  <rect width="960" height="540" rx="24" fill="#FFFFFF"/>
+  <path d="M0 330h960v210H0z" fill="#F8F3E5"/>
+  <path d="M142 382h674v66H142z" fill="#12213A"/>
+  <path d="M178 348h602v46H178z" fill="#FAB800"/>
+  <g stroke="#1A4387" stroke-width="8" opacity=".8">
+    <path d="M190 348v100M270 348v100M350 348v100M430 348v100M510 348v100M590 348v100M670 348v100M750 348v100"/>
+    <path d="M178 370h602M178 424h602"/>
+  </g>
+  <path d="M680 168h146v62H680z" fill="#1A4387"/>
+  <path d="M720 230c-46 32-118 68-214 112" stroke="#FAB800" stroke-width="18" stroke-linecap="round"/>
+  <circle cx="716" cy="252" r="25" fill="#12213A" stroke="#FAB800" stroke-width="7"/>
+  <circle cx="810" cy="252" r="25" fill="#12213A" stroke="#FAB800" stroke-width="7"/>
+  <text x="74" y="82" fill="#12213A" font-family="Arial, sans-serif" font-size="28" font-weight="700">Заливка фундамента</text>
+</svg>

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+  <title id="title">Бетононасос на объекте</title>
+  <desc id="desc">Временная SVG-заглушка автобетононасоса со стрелой</desc>
+  <rect width="960" height="540" rx="24" fill="#FFFFFF"/>
+  <path d="M0 420h960v120H0z" fill="#F8F3E5"/>
+  <path d="M124 380 320 214 516 262 746 104" fill="none" stroke="#12213A" stroke-width="28" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M124 380 320 214 516 262 746 104" fill="none" stroke="#FAB800" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="242" y="330" width="390" height="78" rx="16" fill="#1A4387"/>
+  <rect x="486" y="286" width="116" height="44" rx="10" fill="#FAB800"/>
+  <path d="m276 330 44-68h88l52 68z" fill="#12213A"/>
+  <path d="M118 408h600" stroke="#12213A" stroke-width="14" stroke-linecap="round"/>
+  <circle cx="320" cy="432" r="36" fill="#12213A" stroke="#FAB800" stroke-width="8"/>
+  <circle cx="552" cy="432" r="36" fill="#12213A" stroke="#FAB800" stroke-width="8"/>
+  <path d="M742 105c24 18 48 42 70 72" fill="none" stroke="#FAB800" stroke-width="8" stroke-linecap="round" stroke-dasharray="1 18"/>
+  <text x="72" y="78" fill="#12213A" font-family="Arial, sans-serif" font-size="28" font-weight="700">Подача бетона насосом</text>
+</svg>
