@@ -27,8 +27,8 @@ const columns = [
   {
     title: 'Компания',
     links: [
-      { label: 'О заводе', href: '/#o-zavode' },
-      { label: 'Объекты', href: '/#kejsy' },
+      { label: 'О заводе', href: '/o-kompanii/' },
+      { label: 'Объекты', href: '/obekty/' },
       { label: 'Вопросы и ответы', href: '/#faq' },
       { label: 'Документы и сертификаты', href: '/sertifikaty/' },
       { label: 'Контакты', href: '/kontakty/' },

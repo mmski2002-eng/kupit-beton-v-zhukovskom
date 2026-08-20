@@ -90,7 +90,7 @@ export function Cases() {
           ))}
         </ul>
 
-        <a className={styles.link} href="#zayavka">
+        <a className={styles.link} href="/obekty/">
           Смотреть все объекты →
         </a>
       </div>

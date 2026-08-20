@@ -35,7 +35,7 @@ export function AboutFactory() {
             ))}
           </ul>
 
-          <a className={styles.link} href="#zayavka">
+          <a className={styles.link} href="/o-kompanii/">
             Подробнее о заводе →
           </a>
         </div>

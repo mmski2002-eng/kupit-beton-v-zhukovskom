@@ -19,9 +19,9 @@ export const company = {
 
 export const nav = [
   { label: 'Каталог', href: '/tovarnyy-beton/' },
-  { label: 'Доставка', href: '/#dostavka' },
+  { label: 'Доставка', href: '/dostavka/' },
   { label: 'Услуги', href: '/#uslugi' },
-  { label: 'О заводе', href: '/#o-zavode' },
+  { label: 'О заводе', href: '/o-kompanii/' },
   { label: 'Блог', href: '/blog/' },
   { label: 'Контакты', href: '/kontakty/' },
 ];
