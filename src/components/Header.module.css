@@ -98,6 +98,7 @@
   padding: 6px 0;
   border-bottom: 2px solid transparent;
   cursor: pointer;
+  white-space: nowrap;
   transition: border-color var(--transition);
 }
 .nav a:hover,
@@ -118,14 +119,14 @@
 
 .catalogMenu {
   position: absolute;
-  top: calc(100% + 16px);
+  top: calc(100% + 12px);
   left: 0;
-  width: min(760px, calc(100vw - 32px));
+  width: min(640px, calc(100vw - 32px));
   transform: none;
   display: grid;
-  grid-template-columns: 1.1fr 1.3fr 1.1fr;
-  gap: 18px;
-  padding: 20px;
+  grid-template-columns: 0.8fr 1.15fr 1.35fr 1.1fr;
+  gap: 12px;
+  padding: 14px;
   border: 1px solid var(--color-border);
   border-radius: var(--radius);
   background: var(--color-bg);
@@ -149,21 +150,21 @@
 }
 
 .catalogGroup p {
-  margin: 0 0 10px;
+  margin: 0 0 8px;
   color: var(--color-text-secondary);
   font: 700 12px/1.2 var(--font-heading);
 }
 
 .catalogGroup div {
   display: grid;
-  gap: 8px;
+  gap: 6px;
 }
 
 .catalogGroup a {
   padding: 0;
   border: 0;
-  font-size: 14px;
-  line-height: 1.25;
+  font-size: 13px;
+  line-height: 1.2;
 }
 
 .catalogGroup a:hover {
