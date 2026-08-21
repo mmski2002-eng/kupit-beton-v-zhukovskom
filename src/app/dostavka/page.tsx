@@ -8,7 +8,7 @@ import { Calculator } from '@/components/Calculator';
 import { Guarantees } from '@/components/Guarantees';
 import { FAQ } from '@/components/FAQ';
 import { Footer } from '@/components/Footer';
-import { company, deliveryTariffs } from '@/data/site';
+import { company, deliveryCities, deliveryTariffs } from '@/data/site';
 import styles from '@/styles/subpage.module.css';
 
 export const metadata: Metadata = pageMetadata({
@@ -25,6 +25,10 @@ const subPages = [
   { href: '/dostavka/po-grafiku/', title: 'По графику', text: 'Плановые поставки для подрядчиков и застройщиков' },
   { href: '/dostavka/samovyvoz/', title: 'Самовывоз', text: 'Загрузка вашего миксера с завода' },
 ];
+
+const deliveryMapQuery = encodeURIComponent(company.addressFull);
+const deliveryMapEmbedUrl = `https://www.google.com/maps?q=${deliveryMapQuery}&z=10&output=embed`;
+const deliveryMapExternalUrl = `https://www.google.com/maps/search/?api=1&query=${deliveryMapQuery}`;
 
 const zoneRows = [
   { city: 'Жуковский', dist: 'в черте', note: 'Бесплатная доставка' },
@@ -139,27 +143,48 @@ export default function DostavkaPage() {
         <section className="section">
           <div className="container">
             <div className="section__head">
-              <h2>Стоимость доставки бетона</h2>
-              <p className="section__lead">Раменский район — бесплатно. Тариф умножается на объём заказа.</p>
+              <h2>Куда доставляем бетон</h2>
+              <p className="section__lead">
+                Доставляем до 50 км от завода. Адрес завода: {company.addressFull}. Раменский район — бесплатно,
+                дальше тариф зависит от расстояния и умножается на объём заказа.
+              </p>
             </div>
             <div className={styles.zoneMap}>
-              <div className={styles.zoneGraphic} aria-label="Схема зон доставки 10, 20, 30 и 50 км">
-                <span className={styles.zone50}>50 км</span>
-                <span className={styles.zone30}>30 км</span>
-                <span className={styles.zone20}>20 км</span>
-                <span className={styles.zone10}>10 км</span>
-                <span className={styles.zoneCenter}>Завод</span>
+              <div className={styles.zoneMapFrame} aria-label="Карта зон доставки 10, 20, 30 и 50 км от завода">
+                <iframe
+                  title={`Карта зон доставки от ${company.addressFull}`}
+                  src={deliveryMapEmbedUrl}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  allowFullScreen
+                />
+                <div className={styles.zoneMapOverlay} aria-hidden="true">
+                  <span className={`${styles.zoneRing} ${styles.zoneRing10}`}>10 км</span>
+                  <span className={`${styles.zoneRing} ${styles.zoneRing20}`}>20 км</span>
+                  <span className={`${styles.zoneRing} ${styles.zoneRing30}`}>30 км</span>
+                  <span className={`${styles.zoneRing} ${styles.zoneRing50}`}>50 км</span>
+                  <span className={styles.zonePin}>Завод</span>
+                </div>
               </div>
               <div className={styles.zoneLegend}>
-                <h3>Кольца доставки</h3>
-                <p>10 км — ближняя зона, 20–30 км — основной пояс поставок, до 50 км — дальняя доставка по тарифу.</p>
-                <ul className={styles.plainList}>
-                  <li>Раменский район — бесплатно</li>
-                  <li>До 5 км — 500 ₽/м³</li>
-                  <li>30–40 км — 800–850 ₽/м³</li>
-                  <li>40–50 км — 900 ₽/м³</li>
-                </ul>
+                <h3>Зоны доставки от юридического адреса</h3>
+                <p>
+                  Кольца 10/20/30/50 км нанесены поверх карты от точки {company.street}. Точный маршрут и цену
+                  диспетчер подтверждает по адресу объекта.
+                </p>
+                <div className={styles.zoneChips}>
+                  {deliveryCities.map((city) => (
+                    <span key={city}>{city}</span>
+                  ))}
+                </div>
+                <a className="btn btn--ghost" href={deliveryMapExternalUrl} target="_blank" rel="noreferrer">
+                  Открыть точку в Google Maps
+                </a>
               </div>
+            </div>
+            <div className="section__head">
+              <h2>Стоимость доставки бетона</h2>
+              <p className="section__lead">Тарифы рассчитаны от адреса: {company.addressFull}.</p>
             </div>
             <div className="table-scroll">
               <table className="data-table">
