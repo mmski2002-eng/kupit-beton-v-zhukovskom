@@ -12,7 +12,7 @@
   align-items: center;
   gap: 20px;
   min-height: 72px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 }
 
 .logo {
@@ -84,14 +84,20 @@
   display: flex;
   gap: 22px;
   align-items: center;
+  flex: 0 1 auto;
+  min-width: 0;
 }
 
 .nav a,
 .catalogLink {
+  appearance: none;
+  border: 0;
+  background: transparent;
   color: var(--color-text-primary);
   font: 500 15px/1 var(--font-body);
   padding: 6px 0;
   border-bottom: 2px solid transparent;
+  cursor: pointer;
   transition: border-color var(--transition);
 }
 .nav a:hover,
@@ -113,9 +119,9 @@
 .catalogMenu {
   position: absolute;
   top: calc(100% + 16px);
-  left: 50%;
+  left: 0;
   width: min(760px, calc(100vw - 32px));
-  transform: translateX(-50%);
+  transform: none;
   display: grid;
   grid-template-columns: 1.1fr 1.3fr 1.1fr;
   gap: 18px;
@@ -131,7 +137,8 @@
 }
 
 .catalogItem:hover .catalogMenu,
-.catalogItem:focus-within .catalogMenu {
+.catalogItem:focus-within .catalogMenu,
+.catalogItemOpen .catalogMenu {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
@@ -168,6 +175,7 @@
   align-items: center;
   gap: 16px;
   margin-left: auto;
+  flex: 0 0 auto;
 }
 
 .phoneWrap {
@@ -266,10 +274,23 @@
   transform: translateY(-7px) rotate(-45deg);
 }
 
-@media (max-width: 1024px) {
-  .nav {
-    gap: 16px;
+@media (max-width: 1180px) {
+  .inner {
+    gap: 14px;
   }
+  .nav {
+    gap: 14px;
+  }
+  .contacts {
+    gap: 10px;
+  }
+  .cta,
+  .orderCta {
+    padding-inline: 14px;
+  }
+}
+
+@media (max-width: 1080px) {
   .phoneWrap {
     display: none;
   }

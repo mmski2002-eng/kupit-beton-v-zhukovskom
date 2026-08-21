@@ -6,6 +6,7 @@ import styles from './Header.module.css';
 
 export function HeaderMobileNav() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [catalogOpen, setCatalogOpen] = useState(false);
 
   return (
     <>
@@ -24,11 +25,22 @@ export function HeaderMobileNav() {
       <nav className={`${styles.nav} ${menuOpen ? styles.navOpen : ''}`} aria-label="Основная навигация">
         {nav.map((item) => (
           item.href === '/tovarnyy-beton/' ? (
-            <div className={styles.catalogItem} key={item.href}>
-              <a className={styles.catalogLink} href={item.href}>
+            <div className={`${styles.catalogItem} ${catalogOpen ? styles.catalogItemOpen : ''}`} key={item.href}>
+              <button
+                type="button"
+                className={styles.catalogLink}
+                aria-expanded={catalogOpen}
+                onClick={() => setCatalogOpen((open) => !open)}
+              >
                 {item.label} <span aria-hidden="true">▾</span>
-              </a>
+              </button>
               <div className={styles.catalogMenu}>
+                <section className={styles.catalogGroup}>
+                  <p>Каталог</p>
+                  <div>
+                    <a href={item.href}>Все товары</a>
+                  </div>
+                </section>
                 {catalogFacets.map((facet) => (
                   <section className={styles.catalogGroup} key={facet.title}>
                     <p>{facet.title}</p>
