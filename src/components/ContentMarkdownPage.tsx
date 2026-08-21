@@ -1,5 +1,7 @@
 import { Header } from './Header';
+import { Calculator } from './Calculator';
 import { LeadForm } from './LeadForm';
+import { Guarantees } from './Guarantees';
 import { FinalCTA } from './FinalCTA';
 import { Footer } from './Footer';
 import { PlaceholderVisual, type PlaceholderVisualKind } from './PlaceholderVisual';
@@ -107,6 +109,10 @@ export function ContentMarkdownPage({ page, html }: Props) {
             )}
           </div>
         </section>
+
+        {page.components.calculator && <Calculator title={`Рассчитайте стоимость: ${page.crumb}`} />}
+
+        {page.components.guarantees && <Guarantees title="Четыре гарантии на каждый заказ" />}
 
         <section className="section section--alt" id="zayavka">
           <div className={`container ${styles.cta}`}>

@@ -20,6 +20,10 @@ export type ContentPage = ContentPageRef & {
   h1: string;
   subtitle: string;
   body: string;
+  components: {
+    calculator: boolean;
+    guarantees: boolean;
+  };
 };
 
 export const trustPages: ContentPageRef[] = [
@@ -130,12 +134,48 @@ function pick(raw: string, patterns: RegExp[], fallback = ''): string {
   return fallback;
 }
 
+function stripTechnicalBlocks(markdown: string): string {
+  const lines = markdown.split(/\r?\n/);
+  const kept: string[] = [];
+  let skippingComponentBlock = false;
+
+  for (const line of lines) {
+    const trimmed = line.trim();
+    const isHeading = /^#{1,6}\s+/.test(trimmed);
+
+    if (/^#{1,6}\s+(?:\d+\.\s*)?JSON-HANDOFF\b/i.test(trimmed) || /^JSON-HANDOFF\b/i.test(trimmed)) {
+      break;
+    }
+
+    if (isHeading && /\[КОМПОНЕНТ/i.test(trimmed)) {
+      skippingComponentBlock = true;
+      continue;
+    }
+
+    if (skippingComponentBlock) {
+      if (isHeading) {
+        skippingComponentBlock = false;
+      } else {
+        continue;
+      }
+    }
+
+    if (/^\s*→\s*\[КОМПОНЕНТ/i.test(line) || /\[КОМПОНЕНТ/i.test(line)) {
+      continue;
+    }
+
+    kept.push(line);
+  }
+
+  return kept.join('\n');
+}
+
 function cleanBody(raw: string): string {
   const lines = raw.split(/\r?\n/);
   const start = lines.findIndex((line) => /^#{1,3}\s+B3\b|^##\s+B3\b/i.test(line.trim()));
   const relevantLines = start >= 0 ? lines.slice(start) : lines;
   const specsStart = start >= 0 ? relevantLines.findIndex((line, index) => index > 0 && /^##\s+\d+\.\d+\s+/.test(line.trim())) : -1;
-  const body = (specsStart >= 0 ? relevantLines.slice(0, specsStart) : relevantLines).join('\n');
+  const body = stripTechnicalBlocks((specsStart >= 0 ? relevantLines.slice(0, specsStart) : relevantLines).join('\n'));
 
   return body
     .replace(/```json[\s\S]*?```/g, '')
@@ -201,6 +241,10 @@ export function getContentPage(ref: ContentPageRef): ContentPage {
     h1: normalizeGeoClaims(h1),
     subtitle: normalizeGeoClaims(subtitle),
     body: normalizeGeoClaims(cleanBody(raw)),
+    components: {
+      calculator: raw.includes('[КОМПОНЕНТ C4]'),
+      guarantees: raw.includes('[КОМПОНЕНТ C6]'),
+    },
   };
 }
 
