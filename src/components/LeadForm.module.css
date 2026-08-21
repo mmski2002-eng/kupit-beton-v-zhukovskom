@@ -14,12 +14,49 @@
   grid-column: 1 / -1;
 }
 
+.gradeField {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.gradePicker {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(72px, 1fr));
+  gap: 8px;
+}
+
+.gradePill {
+  min-height: 42px;
+  padding: 10px 12px;
+  border: none;
+  border-radius: var(--radius-pill);
+  background: var(--color-badge);
+  color: var(--color-badge-text);
+  font: 700 14px / 1 var(--font-heading);
+  cursor: pointer;
+  transition: background var(--transition), color var(--transition);
+}
+
+.gradePill:hover {
+  background: var(--color-accent-light);
+}
+
+.gradePillActive {
+  background: var(--color-accent);
+  color: var(--color-text-primary);
+}
+
 .submitShort {
   justify-self: start;
 }
 
 .note {
   margin: 0;
+}
+
+.messengers {
+  margin: -4px 0 0;
 }
 
 @media (max-width: 860px) {

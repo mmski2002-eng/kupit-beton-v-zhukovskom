@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useId, useState, type FormEvent } from 'react';
-import { formGrades } from '@/data/site';
+import { company, formGrades, telegram, whatsapp } from '@/data/site';
 import styles from './LeadForm.module.css';
 
 type LeadFormProps = {
@@ -45,7 +45,13 @@ export function LeadForm({
     const data = new FormData(form);
     const gradeValue = String(data.get('grade') ?? '');
     const volumeValue = String(data.get('volume') ?? '');
-    setStatus(`Заявка принята: ${gradeValue}, ${volumeValue} м³. Диспетчер перезвонит в течение 15 минут.`);
+    const lines = Array.from(data.entries())
+      .filter(([, value]) => String(value).trim() !== '')
+      .map(([key, value]) => `${key}: ${value}`);
+    const subject = `Заявка с сайта: ${gradeValue || 'бетон'} ${volumeValue ? `${volumeValue} м³` : ''}`.trim();
+    const body = ['Новая заявка с сайта kupit-beton-v-zhukovskom.ru', '', ...lines].join('\n');
+    window.location.assign(`mailto:${company.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`);
+    setStatus(`Заявка подготовлена: ${gradeValue}, ${volumeValue} м³. Откроется письмо менеджеру; диспетчер перезвонит в течение 15 минут.`);
     form.reset();
     setGradeValue(grade);
     setVolumeValue(volume ?? '');
@@ -61,16 +67,37 @@ export function LeadForm({
           </label>
         )}
 
-        <label className="field">
-          <span className="field__label">Марка бетона *</span>
-          <select name="grade" required value={gradeValue} onChange={(e) => setGradeValue(e.target.value)}>
-            {formGrades.map((g) => (
-              <option value={g} key={g}>
-                {g}
-              </option>
-            ))}
-          </select>
-        </label>
+        {variant === 'full' ? (
+          <div className={`${styles.gradeField} ${styles.wide}`}>
+            <span className="field__label">Марка бетона *</span>
+            <input type="hidden" name="grade" value={gradeValue} />
+            <div className={styles.gradePicker} role="radiogroup" aria-label="Марка бетона">
+              {formGrades.map((g) => (
+                <button
+                  type="button"
+                  key={g}
+                  className={`${styles.gradePill} ${g === gradeValue ? styles.gradePillActive : ''}`}
+                  onClick={() => setGradeValue(g)}
+                  role="radio"
+                  aria-checked={g === gradeValue}
+                >
+                  {g}
+                </button>
+              ))}
+            </div>
+          </div>
+        ) : (
+          <label className="field">
+            <span className="field__label">Марка бетона *</span>
+            <select name="grade" required value={gradeValue} onChange={(e) => setGradeValue(e.target.value)}>
+              {formGrades.map((g) => (
+                <option value={g} key={g}>
+                  {g}
+                </option>
+              ))}
+            </select>
+          </label>
+        )}
 
         <label className="field">
           <span className="field__label">Объём, м³ *</span>
@@ -109,6 +136,22 @@ export function LeadForm({
               <span className="field__label">Дата доставки</span>
               <input type="date" name="date" />
             </label>
+            <label className="field">
+              <span className="field__label">Время доставки</span>
+              <input type="time" name="time" min="08:00" max="22:00" />
+            </label>
+            <label className="field">
+              <span className="field__label">Тип заказчика *</span>
+              <select name="customerType" required>
+                <option value="Физлицо">Физлицо</option>
+                <option value="Юрлицо">Юрлицо</option>
+                <option value="ИП">ИП</option>
+              </select>
+            </label>
+            <label className="field">
+              <span className="field__label">Компания</span>
+              <input type="text" name="company" placeholder="для юрлиц и ИП" />
+            </label>
             <label className={`field ${styles.wide}`}>
               <span className="field__label">Комментарий</span>
               <textarea name="comment" rows={3} placeholder="Подвижность, время подачи, нужен ли бетононасос" />
@@ -121,6 +164,12 @@ export function LeadForm({
         {submitLabel}
       </button>
       {note && <p className={`form-note ${styles.note}`}>{note}</p>}
+      {variant === 'full' && (
+        <p className={`form-note ${styles.messengers}`}>
+          Быстрая связь: <a href={company.phoneHref}>звонок</a> · <a href={whatsapp.href}>WhatsApp</a> ·{' '}
+          <a href={telegram.appHref}>Telegram</a>
+        </p>
+      )}
       {status && (
         <p className="form-status is-visible" role="status" aria-live="polite">
           {status}

@@ -1,0 +1,39 @@
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 10px 14px;
+  border-radius: var(--radius);
+  color: #fff;
+  font: 700 14px / 1 var(--font-heading);
+}
+
+.action:hover {
+  text-decoration: none;
+  filter: brightness(0.96);
+}
+
+.phone {
+  background: var(--color-accent);
+  color: var(--color-text-primary);
+}
+
+.whatsapp {
+  background: #25d366;
+}
+
+.telegram {
+  background: #0088cc;
+}
+
+.compact {
+  margin-top: 8px;
+}

@@ -142,6 +142,25 @@ export default function DostavkaPage() {
               <h2>Стоимость доставки бетона</h2>
               <p className="section__lead">Раменский район — бесплатно. Тариф умножается на объём заказа.</p>
             </div>
+            <div className={styles.zoneMap}>
+              <div className={styles.zoneGraphic} aria-label="Схема зон доставки 10, 20, 30 и 50 км">
+                <span className={styles.zone50}>50 км</span>
+                <span className={styles.zone30}>30 км</span>
+                <span className={styles.zone20}>20 км</span>
+                <span className={styles.zone10}>10 км</span>
+                <span className={styles.zoneCenter}>Завод</span>
+              </div>
+              <div className={styles.zoneLegend}>
+                <h3>Кольца доставки</h3>
+                <p>10 км — ближняя зона, 20–30 км — основной пояс поставок, до 50 км — дальняя доставка по тарифу.</p>
+                <ul className={styles.plainList}>
+                  <li>Раменский район — бесплатно</li>
+                  <li>До 5 км — 500 ₽/м³</li>
+                  <li>30–40 км — 800–850 ₽/м³</li>
+                  <li>40–50 км — 900 ₽/м³</li>
+                </ul>
+              </div>
+            </div>
             <div className="table-scroll">
               <table className="data-table">
                 <thead>

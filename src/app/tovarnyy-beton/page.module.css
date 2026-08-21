@@ -2,8 +2,73 @@
   max-width: 880px;
 }
 
+.catalogLayout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 32px;
+  align-items: start;
+}
+
+.sidebar {
+  position: sticky;
+  top: 92px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 22px;
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-dark);
+  color: var(--color-text-on-dark);
+}
+
+.geoBadge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 8px 10px;
+  border-radius: var(--radius);
+  background: var(--color-accent);
+  color: var(--color-text-primary);
+  font: 800 12px / 1.2 var(--font-heading);
+}
+
+.sideGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sideGroup h2 {
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 12px;
+}
+
+.sideGroup a {
+  padding: 8px 10px;
+  border-radius: var(--radius);
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 14px;
+}
+
+.sideGroup a:hover,
+.activeSideLink {
+  background: rgba(250, 184, 0, 0.16);
+  color: #fff;
+  text-decoration: none;
+}
+
 .introText {
   margin-bottom: 14px;
   font-size: 15.5px;
   color: var(--color-text-body);
+}
+
+@media (max-width: 900px) {
+  .catalogLayout {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    position: static;
+  }
 }

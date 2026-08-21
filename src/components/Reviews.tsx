@@ -1,3 +1,4 @@
+import { reviewLinks } from '@/data/site';
 import styles from './Reviews.module.css';
 
 const reviews = [
@@ -57,6 +58,13 @@ export function Reviews() {
             </li>
           ))}
         </ul>
+        <div className={styles.links} id="reviews-source">
+          {reviewLinks.map((link) => (
+            <a href={link.href} key={link.label}>
+              {link.label}
+            </a>
+          ))}
+        </div>
       </div>
     </section>
   );

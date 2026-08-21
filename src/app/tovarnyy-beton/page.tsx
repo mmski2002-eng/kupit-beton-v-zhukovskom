@@ -11,6 +11,7 @@ import { BlogTeaser } from '@/components/BlogTeaser';
 import { FAQ } from '@/components/FAQ';
 import { FinalCTA } from '@/components/FinalCTA';
 import { Footer } from '@/components/Footer';
+import { catalogFacets, company } from '@/data/site';
 import styles from './page.module.css';
 
 export const metadata: Metadata = pageMetadata({
@@ -66,22 +67,37 @@ export default function TovarnyyBetonPage() {
         />
 
         <section className="section">
-          <div className={`container ${styles.intro}`}>
-            <div className="section__head">
-              <h2>Что такое товарный бетон и почему выгодно брать у завода</h2>
+          <div className={`container ${styles.catalogLayout}`}>
+            <aside className={styles.sidebar} aria-label="Фасеты каталога">
+              <span className={styles.geoBadge}>Доставка: {company.city} · Раменский округ</span>
+              {catalogFacets.map((facet) => (
+                <div className={styles.sideGroup} key={facet.title}>
+                  <h2>{facet.title}</h2>
+                  {facet.links.slice(0, 6).map((link, index) => (
+                    <a className={index === 0 ? styles.activeSideLink : undefined} href={link.href} key={link.href}>
+                      {link.label}
+                    </a>
+                  ))}
+                </div>
+              ))}
+            </aside>
+            <div className={styles.intro}>
+              <div className="section__head">
+                <h2>Что такое товарный бетон и почему выгодно брать у завода</h2>
+              </div>
+              <p className={styles.introText}>
+                Товарный бетон (БСТ) — это бетонная смесь, произведённая по ГОСТ 7473-2010 на стационарном заводе и
+                привезённая заказчику уже готовой. В отличие от кустарного замеса, на заводе смесь готовят на
+                калиброванном оборудовании — БСУ Stetter с дозированием компонентов с точностью до граммов. Так
+                исключаются ошибки в пропорциях, из-за которых прочность падает на 30–50%.
+              </p>
+              <p className={styles.introText}>
+                Прочность записывают двумя способами: марка М (кгс/см²) — по советскому стандарту, класс B (МПа) — по
+                действующему ГОСТ. К примеру, М200 = B15: такой бетон держит 196 кгс/см² после 28-суточного твердения.
+                Каждую партию на заводе проверяет аккредитованная лаборатория — на руках у вас паспорт качества, а не
+                обещания.
+              </p>
             </div>
-            <p className={styles.introText}>
-              Товарный бетон (БСТ) — это бетонная смесь, произведённая по ГОСТ 7473-2010 на стационарном заводе и
-              привезённая заказчику уже готовой. В отличие от кустарного замеса, на заводе смесь готовят на
-              калиброванном оборудовании — БСУ Stetter с дозированием компонентов с точностью до граммов. Так
-              исключаются ошибки в пропорциях, из-за которых прочность падает на 30–50%.
-            </p>
-            <p className={styles.introText}>
-              Прочность записывают двумя способами: марка М (кгс/см²) — по советскому стандарту, класс B (МПа) — по
-              действующему ГОСТ. К примеру, М200 = B15: такой бетон держит 196 кгс/см² после 28-суточного твердения.
-              Каждую партию на заводе проверяет аккредитованная лаборатория — на руках у вас паспорт качества, а не
-              обещания.
-            </p>
           </div>
         </section>
 

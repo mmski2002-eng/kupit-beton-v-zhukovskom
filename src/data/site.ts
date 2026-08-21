@@ -2,6 +2,7 @@ export const company = {
   legalName: 'ООО «ПСК «Прогресс»',
   brand: 'ПСК Прогресс',
   inn: '5003088122',
+  kpp: '500301001',
   ogrn: '1105003005326',
   phone: '+7 (499) 111-72-62',
   phoneHref: 'tel:+74991117262',
@@ -17,6 +18,11 @@ export const company = {
   site: 'https://kupit-beton-v-zhukovskom.ru',
 } as const;
 
+export const whatsapp = {
+  label: 'WhatsApp',
+  href: 'https://wa.me/74991117262',
+} as const;
+
 export const nav = [
   { label: 'Каталог', href: '/tovarnyy-beton/' },
   { label: 'Доставка', href: '/dostavka/' },
@@ -25,6 +31,58 @@ export const nav = [
   { label: 'Блог', href: '/blog/' },
   { label: 'Контакты', href: '/kontakty/' },
 ];
+
+export const catalogFacets = [
+  {
+    title: 'По марке',
+    links: [
+      { label: 'М100', href: '/tovarnyy-beton/m100/' },
+      { label: 'М150', href: '/tovarnyy-beton/m150/' },
+      { label: 'М200', href: '/tovarnyy-beton/m200/' },
+      { label: 'М250', href: '/tovarnyy-beton/m250/' },
+      { label: 'М300', href: '/tovarnyy-beton/m300/' },
+      { label: 'М350', href: '/tovarnyy-beton/m350/' },
+      { label: 'М400', href: '/tovarnyy-beton/m400/' },
+      { label: 'М450', href: '/tovarnyy-beton/m450/' },
+      { label: 'М500', href: '/tovarnyy-beton/m500/' },
+      { label: 'М600', href: '/tovarnyy-beton/m600/' },
+    ],
+  },
+  {
+    title: 'По заполнителю',
+    links: [
+      { label: 'На гранитном щебне', href: '/tovarnyy-beton/na-granitnom-shchebne/' },
+      { label: 'На гравийном щебне', href: '/tovarnyy-beton/na-graviynom-shchebne/' },
+      { label: 'На известняковом щебне', href: '/tovarnyy-beton/na-izvestnyakovom-shchebne/' },
+      { label: 'На вторичном щебне', href: '/tovarnyy-beton/na-vtorichnom-shchebne/' },
+    ],
+  },
+  {
+    title: 'По свойствам',
+    links: [
+      { label: 'По классу прочности', href: '/tovarnyy-beton/po-klassu/' },
+      { label: 'Морозостойкий', href: '/tovarnyy-beton/morozostoykiy/' },
+      { label: 'Водонепроницаемый', href: '/tovarnyy-beton/vodonepronicaemyy/' },
+      { label: 'Тощий бетон', href: '/vidy-betona/toshchiy-beton/' },
+    ],
+  },
+];
+
+export const telegram = {
+  label: 'Telegram',
+  appHref: 'tg://resolve?phone=74991117262',
+  webHref: 'https://t.me/share/url?url=https%3A%2F%2Fkupit-beton-v-zhukovskom.ru%2F&text=%D0%9D%D1%83%D0%B6%D0%B5%D0%BD%20%D0%B1%D0%B5%D1%82%D0%BE%D0%BD%20%D1%81%20%D0%B4%D0%BE%D1%81%D1%82%D0%B0%D0%B2%D0%BA%D0%BE%D0%B9',
+} as const;
+
+export const reviewLinks = [
+  { label: 'Отзывы на Яндекс Картах', href: '/kontakty/#reviews-source' },
+  { label: 'Отзывы на 2GIS', href: '/kontakty/#reviews-source' },
+] as const;
+
+export const downloads = {
+  pricePdf: '/files/price-list.pdf',
+  accreditationRequest: '/files/accreditation-request.pdf',
+} as const;
 
 export type PriceRow = {
   grade: string;

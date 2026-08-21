@@ -24,6 +24,7 @@ export function Hero({ badge = 'Бетонный завод · Жуковски�
             <source src="/video/video_hero_bg_01.mp4" type="video/mp4" />
             <source src="/video/video_hero_bg_01.webm" type="video/webm" />
           </video>
+          <span className={styles.priceBadge}>от 4 150 ₽/м³ с НДС</span>
           <span className={styles.scrim} />
         </div>
       )}

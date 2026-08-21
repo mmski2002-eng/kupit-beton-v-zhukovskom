@@ -44,6 +44,30 @@
   color: var(--color-text-body);
 }
 
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 10px 14px;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-bg);
+  color: var(--color-text-primary);
+  font: 700 14px / 1 var(--font-heading);
+}
+
+.links a:hover {
+  border-color: var(--color-accent);
+  text-decoration: none;
+}
+
 @media (max-width: 860px) {
   .grid {
     grid-template-columns: 1fr;

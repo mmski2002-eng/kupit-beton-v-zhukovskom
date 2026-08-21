@@ -8,6 +8,7 @@ import { Guarantees } from '@/components/Guarantees';
 import { FAQ } from '@/components/FAQ';
 import { Footer } from '@/components/Footer';
 import { PlaceholderVisual } from '@/components/PlaceholderVisual';
+import { PumpPicker } from '@/components/PumpPicker';
 import { pumpPriceRows } from '@/data/pumps';
 import { company } from '@/data/site';
 import styles from '@/styles/subpage.module.css';
@@ -193,6 +194,8 @@ export default function ArendaBetononasosaPage() {
             </ul>
           </div>
         </section>
+
+        <PumpPicker />
 
         <section className="section">
           <div className="container">

@@ -34,8 +34,36 @@
   border-radius: var(--radius);
   background: var(--color-accent);
   color: var(--color-text-primary);
-  font: 700 13px/1 var(--font-heading);
-  letter-spacing: 0.02em;
+  overflow: hidden;
+}
+
+.logoMark span {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  border: 3px solid currentColor;
+  border-radius: 4px;
+}
+
+.logoMark span::before,
+.logoMark span::after {
+  content: '';
+  position: absolute;
+  background: currentColor;
+}
+
+.logoMark span::before {
+  left: 4px;
+  right: 4px;
+  top: 5px;
+  height: 3px;
+}
+
+.logoMark span::after {
+  left: 9px;
+  top: -3px;
+  bottom: -3px;
+  width: 3px;
 }
 
 .logoText {
@@ -55,18 +83,84 @@
 .nav {
   display: flex;
   gap: 22px;
+  align-items: center;
 }
 
-.nav a {
+.nav a,
+.catalogLink {
   color: var(--color-text-primary);
   font: 500 15px/1 var(--font-body);
   padding: 6px 0;
   border-bottom: 2px solid transparent;
   transition: border-color var(--transition);
 }
-.nav a:hover {
+.nav a:hover,
+.catalogLink:hover {
   text-decoration: none;
   border-bottom-color: var(--color-accent);
+}
+
+.catalogItem {
+  position: relative;
+}
+
+.catalogLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.catalogMenu {
+  position: absolute;
+  top: calc(100% + 16px);
+  left: 50%;
+  width: min(760px, calc(100vw - 32px));
+  transform: translateX(-50%);
+  display: grid;
+  grid-template-columns: 1.1fr 1.3fr 1.1fr;
+  gap: 18px;
+  padding: 20px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-bg);
+  box-shadow: 0 18px 50px var(--color-shadow);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity var(--transition), visibility var(--transition);
+}
+
+.catalogItem:hover .catalogMenu,
+.catalogItem:focus-within .catalogMenu {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.catalogGroup {
+  margin: 0;
+}
+
+.catalogGroup p {
+  margin: 0 0 10px;
+  color: var(--color-text-secondary);
+  font: 700 12px/1.2 var(--font-heading);
+}
+
+.catalogGroup div {
+  display: grid;
+  gap: 8px;
+}
+
+.catalogGroup a {
+  padding: 0;
+  border: 0;
+  font-size: 14px;
+  line-height: 1.25;
+}
+
+.catalogGroup a:hover {
+  color: var(--color-secondary);
 }
 
 .contacts {
@@ -94,6 +188,14 @@
 
 .cta {
   padding: 12px 24px;
+}
+
+.orderCta {
+  padding: 12px 20px;
+}
+
+.mobileActions {
+  display: none;
 }
 
 .cartBtn {
@@ -177,37 +279,165 @@
   .inner {
     min-height: 64px;
     gap: 12px;
+    flex-wrap: nowrap;
+  }
+  .logo {
+    min-width: 0;
+  }
+  .logoText {
+    min-width: 0;
+  }
+  .logoName {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
   .burger {
     display: flex;
     order: 3;
+    flex: 0 0 44px;
   }
   .contacts {
     order: 2;
+    gap: 10px;
+    margin-left: 0;
+    flex: 0 1 auto;
+    min-width: 0;
+  }
+  .phoneWrap {
+    display: flex;
+  }
+  .phoneWrap :global(.online-badge) {
+    display: none;
+  }
+  .phone {
+    font-size: 14px;
+  }
+  .cartBtn,
+  .cta {
+    display: none;
+  }
+  .orderCta {
+    display: inline-flex;
+    padding: 11px 16px;
+    white-space: nowrap;
   }
   .nav {
     order: 4;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
     width: 100%;
     flex-direction: column;
     gap: 0;
     max-height: 0;
     overflow: hidden;
+    padding: 0 max(16px, calc((100vw - var(--container)) / 2));
+    background: var(--color-bg);
+    border-bottom: 1px solid var(--color-border);
+    box-shadow: var(--shadow-header);
     transition: max-height 0.25s ease;
   }
-  .nav a {
+  .nav a,
+  .catalogLink {
     padding: 13px 0;
     border-bottom: 1px solid var(--color-border);
   }
+  .catalogItem {
+    width: 100%;
+  }
+  .catalogLink {
+    display: flex;
+    justify-content: space-between;
+  }
+  .catalogMenu {
+    position: static;
+    width: 100%;
+    transform: none;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 0 0 14px 12px;
+    border: 0;
+    border-bottom: 1px solid var(--color-border);
+    border-radius: 0;
+    box-shadow: none;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+  .catalogGroup div {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .catalogGroup a {
+    padding: 4px 0;
+    border: 0;
+  }
+  .mobileActions {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 0 18px;
+  }
+  .mobilePhone {
+    font: 700 16px/1.1 var(--font-heading);
+    white-space: nowrap;
+  }
+  .mobileOrder {
+    padding: 11px 18px;
+  }
   .navOpen {
-    max-height: 320px;
+    max-height: calc(100vh - 64px);
+    overflow: auto;
   }
 }
 
 @media (max-width: 480px) {
+  .inner {
+    gap: 8px;
+  }
+  .logo {
+    flex: 0 0 auto;
+  }
+  .logoMark {
+    width: 38px;
+    height: 38px;
+    flex: 0 0 38px;
+  }
+  .logoName {
+    font-size: 16px;
+  }
+  .logoText {
+    display: none;
+  }
   .logoSub {
     display: none;
   }
-  .cta {
-    padding: 11px 16px;
+  .contacts {
+    gap: 6px;
+  }
+  .phoneWrap {
+    display: flex;
+  }
+  .phone {
+    font-size: 12px;
+  }
+  .orderCta {
+    min-height: 38px;
+    padding: 9px 10px;
+    font-size: 12.5px;
+  }
+  .burger {
+    width: 40px;
+    height: 40px;
+    flex-basis: 40px;
+  }
+  .mobileActions {
+    grid-template-columns: 1fr;
+  }
+  .catalogGroup div {
+    grid-template-columns: 1fr;
   }
 }

@@ -8,7 +8,7 @@ import { PriceCatalog } from '@/components/PriceCatalog';
 import { Calculator } from '@/components/Calculator';
 import { FAQ } from '@/components/FAQ';
 import { Footer } from '@/components/Footer';
-import { company, deliveryTariffs } from '@/data/site';
+import { company, deliveryTariffs, downloads } from '@/data/site';
 import styles from '@/styles/subpage.module.css';
 
 export const metadata: Metadata = pageMetadata({
@@ -101,6 +101,18 @@ export default function CenyPage() {
         </section>
 
         <PriceCatalog title="Товарный бетон на гравии и граните" lead="Марки и цены с НДС. Кнопка «В корзину» добавляет позицию в заявку." />
+
+        <section className="section section--alt">
+          <div className="container">
+            <div className="section__head">
+              <h2>Прайс-лист PDF</h2>
+              <p className="section__lead">Скачиваемая версия прайса для быстрого согласования заказа.</p>
+              <a className="btn" href={downloads.pricePdf} download>
+                Скачать прайс PDF
+              </a>
+            </div>
+          </div>
+        </section>
 
         <section className="section">
           <div className="container">

@@ -27,6 +27,19 @@
   background: linear-gradient(90deg, rgba(18, 33, 58, 0.92) 0%, rgba(18, 33, 58, 0.78) 55%, rgba(18, 33, 58, 0.6) 100%);
 }
 
+.priceBadge {
+  position: absolute;
+  right: max(24px, calc((100vw - var(--container)) / 2));
+  top: 34px;
+  z-index: 1;
+  padding: 10px 14px;
+  border-radius: var(--radius);
+  background: var(--color-accent);
+  color: var(--color-text-primary);
+  font: 800 14px / 1 var(--font-heading);
+  box-shadow: 0 10px 26px rgba(18, 33, 58, 0.24);
+}
+
 .inner {
   position: relative;
   display: grid;
@@ -118,5 +131,12 @@
   }
   .formCard {
     padding: 18px;
+  }
+  .priceBadge {
+    position: relative;
+    display: inline-flex;
+    top: 16px;
+    left: 16px;
+    right: auto;
   }
 }

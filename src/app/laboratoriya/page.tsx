@@ -7,7 +7,7 @@ import { LeadForm } from '@/components/LeadForm';
 import { FAQ } from '@/components/FAQ';
 import { Footer } from '@/components/Footer';
 import { PlaceholderVisual } from '@/components/PlaceholderVisual';
-import { company } from '@/data/site';
+import { company, downloads } from '@/data/site';
 import styles from '@/styles/subpage.module.css';
 
 export const metadata: Metadata = pageMetadata({
@@ -181,6 +181,9 @@ export default function LaboratoriyaPage() {
               </table>
             </div>
             <p className="form-note">Срок выдачи протокола — от 1 рабочего дня.</p>
+            <a className="btn btn--ghost" href={downloads.pricePdf} download>
+              Скачать прайс PDF
+            </a>
           </div>
         </section>
 
@@ -217,7 +220,7 @@ export default function LaboratoriyaPage() {
           </div>
         </section>
 
-        <section className="section">
+        <section className="section" id="akkreditaciya">
           <div className="container">
             <div className="section__head">
               <h2>Аккредитация и нормативная база</h2>
@@ -233,6 +236,12 @@ export default function LaboratoriyaPage() {
                 <li key={n}>{n}</li>
               ))}
             </ul>
+            <a className="btn btn--ghost" href={downloads.accreditationRequest} download>
+              Скачать свидетельство об аккредитации
+            </a>
+            <p className="form-note">
+              Оригинальный скан свидетельства и номер аккредитации нужно заменить после получения документа от клиента.
+            </p>
           </div>
         </section>
 

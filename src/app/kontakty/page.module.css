@@ -52,6 +52,41 @@
   color: var(--color-text-secondary);
 }
 
+.mapSection {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.75fr) minmax(0, 1.25fr);
+  gap: 24px;
+  align-items: stretch;
+}
+
+.mapCopy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 16px;
+}
+
+.mapCopy p {
+  color: var(--color-text-body);
+}
+
+.mapFrame {
+  min-height: 360px;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-bg);
+}
+
+.mapFrame iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 360px;
+  border: 0;
+}
+
 .formSection {
   max-width: 760px;
 }
@@ -61,8 +96,18 @@
   color: var(--color-text-body);
 }
 
+.reviewLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
 @media (max-width: 760px) {
   .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .mapSection {
     grid-template-columns: 1fr;
   }
 }

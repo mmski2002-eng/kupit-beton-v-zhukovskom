@@ -34,6 +34,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/laboratoriya/',
     '/laboratoriya/podbor-sostava/',
     '/zakazat/',
+    '/korzina/',
     '/optom/',
     '/akcii/',
     '/nashli-deshevle/',

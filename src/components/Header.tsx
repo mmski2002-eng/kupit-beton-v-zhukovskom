@@ -9,7 +9,7 @@ export function Header() {
       <div className={`container ${styles.inner}`}>
         <a className={styles.logo} href="/">
           <span className={styles.logoMark} aria-hidden="true">
-            ПСК
+            <span></span>
           </span>
           <span className={styles.logoText}>
             <span className={styles.logoName}>Прогресс</span>
@@ -29,6 +29,9 @@ export function Header() {
           <HeaderCartButton />
           <a className={`btn ${styles.cta}`} href={company.phoneHref}>
             Позвонить
+          </a>
+          <a className={`btn btn--ghost ${styles.orderCta}`} href="/zakazat/#zayavka">
+            Заказать
           </a>
         </div>
       </div>

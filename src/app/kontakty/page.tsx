@@ -5,8 +5,13 @@ import { JsonLd } from '@/components/JsonLd';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { LeadForm } from '@/components/LeadForm';
-import { company } from '@/data/site';
+import { ContactActions } from '@/components/ContactActions';
+import { company, reviewLinks } from '@/data/site';
 import styles from './page.module.css';
+
+const mapQuery = encodeURIComponent(company.addressFull);
+const mapEmbedUrl = `https://www.google.com/maps?q=${mapQuery}&output=embed`;
+const mapExternalUrl = `https://www.google.com/maps/search/?api=1&query=${mapQuery}`;
 
 export const metadata: Metadata = pageMetadata({
   title: 'Контакты завода бетона в Жуковском — телефон, email',
@@ -45,6 +50,12 @@ export default function KontaktyPage() {
                   </dd>
                 </div>
                 <div>
+                  <dt>Мессенджеры</dt>
+                  <dd>
+                    <ContactActions compact />
+                  </dd>
+                </div>
+                <div>
                   <dt>Режим работы</dt>
                   <dd>{company.hours}, без выходных и праздников</dd>
                 </div>
@@ -67,6 +78,10 @@ export default function KontaktyPage() {
                   <dd>{company.inn}</dd>
                 </div>
                 <div>
+                  <dt>КПП</dt>
+                  <dd>{company.kpp}</dd>
+                </div>
+                <div>
                   <dt>ОГРН</dt>
                   <dd>{company.ogrn}</dd>
                 </div>
@@ -86,6 +101,46 @@ export default function KontaktyPage() {
                 </div>
               </dl>
               <p className={styles.note}>Банковские реквизиты (р/с, БИК, банк) и счёт на оплату — вышлем по запросу на {company.email}.</p>
+            </div>
+          </div>
+        </section>
+
+        <section className="section section--alt">
+          <div className={`container ${styles.mapSection}`}>
+            <div className={styles.mapCopy}>
+              <h2>Карта и адрес</h2>
+              <p>
+                Юридический адрес компании: {company.addressFull}. Для самовывоза и визита заранее согласуйте время с
+                менеджером по телефону <a href={company.phoneHref}>{company.phone}</a>.
+              </p>
+              <a className="btn btn--ghost" href={mapExternalUrl} target="_blank" rel="noreferrer">
+                Открыть в Google Maps
+              </a>
+            </div>
+            <div className={styles.mapFrame}>
+              <iframe
+                title={`Карта: ${company.addressFull}`}
+                src={mapEmbedUrl}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                allowFullScreen
+              />
+            </div>
+          </div>
+        </section>
+
+        <section className="section" id="reviews-source">
+          <div className={`container ${styles.formSection}`}>
+            <h2>Профили с отзывами</h2>
+            <p className={styles.formLead}>
+              Прямые ссылки на карточки Яндекс Карт и 2GIS нужно заменить после получения профилей от клиента.
+            </p>
+            <div className={styles.reviewLinks}>
+              {reviewLinks.map((link) => (
+                <a className="btn btn--ghost" href={link.href} key={link.label}>
+                  {link.label}
+                </a>
+              ))}
             </div>
           </div>
         </section>

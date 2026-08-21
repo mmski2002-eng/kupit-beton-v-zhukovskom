@@ -3,6 +3,7 @@ import { pageMetadata } from '@/lib/metadata';
 import { breadcrumbListSchema } from '@/lib/schema';
 import { JsonLd } from '@/components/JsonLd';
 import { Header } from '@/components/Header';
+import { ContactActions } from '@/components/ContactActions';
 import { LeadForm } from '@/components/LeadForm';
 import { Guarantees } from '@/components/Guarantees';
 import { FAQ } from '@/components/FAQ';
@@ -69,6 +70,7 @@ export default function ZakazatPage() {
                   <li>WhatsApp</li>
                   <li>Форма на сайте</li>
                 </ul>
+                <ContactActions />
               </div>
 
               <div className={styles.formCard}>

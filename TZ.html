@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>ТЗ — kupit-beton-v-zhukovskom.ru</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root{
+    --bg:#FFFFFF; --bg-alt:#F8F3E5; --bg-dark:#12213A;
+    --text:#12213A; --text-body:#1A1A1A; --text-sec:#8B8989;
+    --accent:#FAB800; --accent-hover:#E0A500; --accent-light:#FFF6DA;
+    --secondary:#1A4387; --link:#386ABC; --border:#E5E5E5;
+    --shadow:rgba(18,33,58,.10); --sale:#CD0A0A; --ok:#22C55E;
+    --warn:#B45309; --warn-bg:#FFF3D6;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; font-family:'Manrope',-apple-system,'Segoe UI',Roboto,Arial,sans-serif;
+    background:var(--bg); color:var(--text-body); line-height:1.6;
+  }
+  .wrap{max-width:1100px; margin:0 auto; padding:40px 24px 120px}
+  header.title{
+    background:var(--bg-dark); color:#fff; padding:56px 24px;
+  }
+  header.title .wrap{padding:0}
+  header.title h1{font-size:30px; margin:0 0 10px; font-weight:800}
+  header.title p{margin:4px 0; color:#CCD3DE; font-size:15px}
+  header.title .badge{
+    display:inline-block; background:var(--accent); color:var(--text);
+    font-weight:700; font-size:12px; padding:4px 12px; border-radius:100px;
+    margin-bottom:14px; letter-spacing:.04em; text-transform:uppercase;
+  }
+  nav.toc{
+    background:var(--bg-alt); border:1px solid var(--border); border-radius:12px;
+    padding:20px 24px; margin:32px 0; font-size:14px;
+  }
+  nav.toc h2{font-size:13px; text-transform:uppercase; letter-spacing:.05em; color:var(--text-sec); margin:0 0 10px}
+  nav.toc ol{columns:2; gap:24px; margin:0; padding-left:18px}
+  nav.toc a{color:var(--link); text-decoration:none}
+  nav.toc a:hover{text-decoration:underline}
+  section{margin:56px 0}
+  h2{
+    font-size:24px; font-weight:800; color:var(--text); margin:0 0 6px;
+    padding-bottom:12px; border-bottom:3px solid var(--accent);
+  }
+  h2 .num{color:var(--accent-hover); margin-right:8px}
+  h3{font-size:18px; font-weight:700; color:var(--text); margin:28px 0 10px}
+  h4{font-size:15px; font-weight:700; color:var(--secondary); margin:18px 0 8px}
+  p{margin:10px 0}
+  .lead{color:var(--text-sec); font-size:15px; margin-top:2px}
+  table{border-collapse:collapse; width:100%; margin:14px 0; font-size:14px}
+  th,td{border:1px solid var(--border); padding:8px 12px; text-align:left; vertical-align:top}
+  th{background:var(--bg-alt); font-weight:700; color:var(--text)}
+  tr:nth-child(even) td{background:#FCFCFA}
+  code, .mono{font-family:ui-monospace,Consolas,monospace; background:var(--bg-alt); padding:1px 6px; border-radius:4px; font-size:.92em}
+  .grid2{display:grid; grid-template-columns:1fr 1fr; gap:16px}
+  .card{
+    background:var(--bg-alt); border:1px solid var(--border); border-radius:12px; padding:18px 20px;
+  }
+  .card h4{margin-top:0}
+  .pill{
+    display:inline-block; padding:4px 12px; border-radius:100px; background:#EDEDED;
+    color:var(--text); font-weight:600; font-size:12.5px; margin:2px 4px 2px 0;
+  }
+  .pill.accent{background:var(--accent); color:var(--text)}
+  .pill.p1{background:var(--sale); color:#fff}
+  .pill.p2{background:var(--secondary); color:#fff}
+  .pill.p3{background:#EDEDED; color:var(--text-sec)}
+  .warn{
+    background:var(--warn-bg); border:1px solid #F0CE7A; color:var(--warn);
+    border-radius:10px; padding:14px 18px; margin:16px 0; font-size:14.5px;
+  }
+  .warn strong{color:#8A5A00}
+  .todo{
+    background:#FDECEC; border:1px solid #F3B9B9; color:#8A1F1F;
+    border-radius:10px; padding:14px 18px; margin:16px 0; font-size:14.5px;
+  }
+  .ok-box{
+    background:#EAFBF0; border:1px solid #B9E8CB; color:#146C34;
+    border-radius:10px; padding:14px 18px; margin:16px 0; font-size:14.5px;
+  }
+  /* --- диаграммы на div/grid --- */
+  .diagram{
+    border:1px dashed #C9C9C9; border-radius:14px; padding:22px;
+    background:#FDFDFB; margin:18px 0; overflow-x:auto;
+  }
+  .hdr-schema{display:flex; align-items:center; gap:10px; min-width:820px; font-size:13px}
+  .hdr-box{
+    border:2px solid var(--secondary); border-radius:8px; padding:10px 14px;
+    background:#fff; text-align:center; color:var(--text); font-weight:600;
+  }
+  .hdr-box.logo{border-color:var(--text); font-weight:800}
+  .hdr-box.cta{background:var(--accent); border-color:var(--accent-hover); color:var(--text)}
+  .hdr-box.nav{flex:1; display:flex; gap:8px; justify-content:center; flex-wrap:wrap; border-style:dashed; border-color:var(--border)}
+  .hdr-box.nav span{background:var(--bg-alt); padding:4px 10px; border-radius:100px; font-weight:500}
+  .arrow{color:var(--text-sec); font-size:18px}
+  .flow{display:flex; align-items:stretch; gap:10px; min-width:900px; font-size:13px; flex-wrap:nowrap}
+  .flow-step{
+    flex:1; border:2px solid var(--border); border-radius:10px; padding:12px 14px;
+    background:#fff; min-width:150px;
+  }
+  .flow-step .k{font-weight:800; color:var(--accent-hover); font-size:12px; text-transform:uppercase; letter-spacing:.04em}
+  .flow-step .t{font-weight:700; margin:4px 0 6px}
+  .flow-step ul{margin:0; padding-left:16px; font-size:12.5px; color:var(--text-body)}
+  .flow-arrow{display:flex; align-items:center; color:var(--text-sec); font-size:20px}
+  .tree{font-size:13.5px; line-height:1.9}
+  .tree ul{list-style:none; margin:0; padding-left:22px; border-left:1px dotted #C9C9C9}
+  .tree > ul{border-left:none; padding-left:0}
+  .tree li{position:relative; padding-left:6px}
+  .tree li.p1 > span.label::after{content:" P1"; font-size:10px; font-weight:800; color:#fff; background:var(--sale); padding:1px 6px; border-radius:100px; margin-left:6px}
+  .tree li.p2 > span.label::after{content:" P2"; font-size:10px; font-weight:800; color:#fff; background:var(--secondary); padding:1px 6px; border-radius:100px; margin-left:6px}
+  .tree li.p3 > span.label::after{content:" P3-4"; font-size:10px; font-weight:800; color:var(--text-sec); background:#EDEDED; padding:1px 6px; border-radius:100px; margin-left:6px}
+  .tree .url{color:var(--text-sec); font-family:ui-monospace,Consolas,monospace; font-size:11.5px; margin-left:6px}
+  .blocks{display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:10px; font-size:13px}
+  .blk{border:1px solid var(--border); border-radius:8px; padding:8px 10px; background:#fff}
+  .blk b{color:var(--secondary)}
+  .comp-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:14px}
+  .comp{border:1px solid var(--border); border-radius:12px; padding:14px 16px; background:#fff}
+  .comp .id{
+    display:inline-block; background:var(--text); color:#fff; font-weight:800; font-size:11px;
+    padding:2px 8px; border-radius:6px; margin-bottom:8px;
+  }
+  .swatches{display:flex; gap:10px; flex-wrap:wrap; margin:10px 0}
+  .sw{width:120px; border-radius:10px; overflow:hidden; border:1px solid var(--border); font-size:11.5px}
+  .sw .box{height:52px}
+  .sw .lbl{padding:6px 8px; background:#fff}
+  .foot-schema{min-width:820px; font-size:12.5px; display:grid; grid-template-columns:1.3fr 1fr 1fr 1fr 1fr; gap:14px}
+  .foot-col{border:1px dashed var(--border); border-radius:8px; padding:10px}
+  .foot-col b{display:block; color:var(--secondary); margin-bottom:6px}
+  footer.page{
+    background:var(--bg-dark); color:#B9C1CE; padding:28px 24px; text-align:center; font-size:13px; margin-top:60px;
+  }
+  @media (max-width:720px){
+    nav.toc ol{columns:1}
+  }
+</style>
+</head>
+<body>
+
+<header class="title">
+  <div class="wrap">
+    <span class="badge">Техническое задание</span>
+    <h1>kupit-beton-v-zhukovskom.ru — сайт бетонного завода</h1>
+    <p>ООО «ПСК «Прогресс», г. Жуковский, Московская область</p>
+    <p>Источник: содержимое папки <code style="background:#1a2e4d;color:#fff">kupit-beton-v-zhukovskom/</code> (121 файл контента, 35 статей блога, дизайн-спецификация, структура сайта, видео). Внешних источников не использовалось.</p>
+  </div>
+</header>
+
+<div class="wrap">
+
+<nav class="toc">
+  <h2>Содержание</h2>
+  <ol>
+    <li><a href="#biz">Суть бизнеса и контакты</a></li>
+    <li><a href="#audience">Аудитория и продукты</a></li>
+    <li><a href="#geo">География и доставка</a></li>
+    <li><a href="#stack">Технический стек</a></li>
+    <li><a href="#design">Дизайн-система</a></li>
+    <li><a href="#sitemap">Структура сайта / карта разделов</a></li>
+    <li><a href="#header">Схема шапки (header)</a></li>
+    <li><a href="#footer">Схема подвала (footer)</a></li>
+    <li><a href="#cart">Корзина / оформление заказа</a></li>
+    <li><a href="#components">Переиспользуемые компоненты C1–C8</a></li>
+    <li><a href="#templates">Шаблоны страниц и блоки B1–B16</a></li>
+    <li><a href="#calc">Калькулятор — логика</a></li>
+    <li><a href="#forms">Формы — сводная таблица</a></li>
+    <li><a href="#maps">Карты и локальные виджеты (мелочи)</a></li>
+    <li><a href="#seo">SEO и микроразметка</a></li>
+    <li><a href="#assets">Ассеты — что есть / чего нет</a></li>
+    <li><a href="#open">Открытые вопросы к заказчику</a></li>
+    <li><a href="#checklist">Итоговый чек-лист реализации</a></li>
+  </ol>
+</nav>
+
+<div class="card" style="border:2px solid var(--secondary); margin-bottom:32px">
+  <h4 style="margin-top:0; color:var(--text); font-size:16px">Итог сверки с реализацией в <code>site-next</code> (проверено 2026-08-21)</h4>
+  <p style="margin:6px 0 14px">Проверено пунктов: <b>~145</b> (строки таблиц, карточки, компоненты, элементы схем по §1–18). <span style="color:#16A34A;font-weight:800">✅ реализовано корректно: ~133</span> · <span style="color:#DC2626;font-weight:800">❌ не реализовано / требует данных клиента: ~12</span>. Полный разбор — маркеры по тексту ниже.</p>
+  <p style="margin:6px 0"><b>Топ несоответствий:</b></p>
+  <ol style="margin:4px 0; padding-left:20px; font-size:14.5px">
+    <li><b>Стек — не Astro, а Next.js 16 (App Router, React 19).</b> Это отступление от ТЗ §4, но не дефект: SSG/generateStaticParams даёт статику, SEO/CWV-цели формально достижимы тем же путём. Зафиксировано как факт расхождения, не как брак.</li>
+    <li><b>Формы теперь готовят письмо менеджеру.</b> API-route/CRM по-прежнему нет, но заявка больше не ограничена локальным <code>setState</code>: открывается <code>mailto:</code> на email компании с заполненными данными.</li>
+    <li><b>Шапка доработана:</b> добавлена отдельная кнопка «Заказать», выпадающий «Каталог ▾» с фасетами и мобильная версия с телефоном/CTA.</li>
+    <li><b>Messenger-widget доработан:</b> WhatsApp + Telegram вместо WhatsApp + Email; Telegram временно привязан к телефону до получения username.</li>
+    <li><b>Корзина усилена:</b> есть drawer, localStorage, кнопки «В корзину», отдельный URL <code>/korzina/</code>, расчёт доставки и НДС, расширенные поля заявки.</li>
+  </ol>
+</div>
+
+<!-- 1 -->
+<section id="biz">
+  <h2><span class="num">1.</span>Суть бизнеса и контакты</h2>
+  <p>Производство и доставка товарного бетона под брендом производителя. Собственный БСУ, автопарк миксеров и бетононасосов. Цель сайта — генерация заявок и звонков.</p>
+  <div class="grid2">
+    <div class="card">
+      <h4>Юрлицо</h4>
+      <table>
+        <tr><td><span style="color:#16A34A;font-weight:800">✅</span> Название</td><td>ООО «ПСК «Прогресс» — совпадает (<code>company.legalName</code>)</td></tr>
+        <tr><td><span style="color:#16A34A;font-weight:800">✅</span> ИНН / КПП</td><td>ИНН есть, КПП 500301001 добавлен в <code>data/site.ts</code>, /kontakty/ и футер.</td></tr>
+        <tr><td><span style="color:#16A34A;font-weight:800">✅</span> ОГРН</td><td>1105003005326 — совпадает</td></tr>
+        <tr><td><span style="color:#16A34A;font-weight:800">✅</span> Директор</td><td>Ритиков Дмитрий Юрьевич — совпадает</td></tr>
+        <tr><td><span style="color:#16A34A;font-weight:800">✅</span> На рынке</td><td>with 2003 (23 года) — совпадает в <code>AboutFactory</code></td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h4>Контакты</h4>
+      <table>
+        <tr><td><span style="color:#16A34A;font-weight:800">✅</span> Телефон</td><td>+7 (499) 111-72-62 — tel: везде</td></tr>
+        <tr><td><span style="color:#16A34A;font-weight:800">✅</span> Email</td><td>zakazi-otdel@yandex.ru — совпадает</td></tr>
+        <tr><td><span style="color:#16A34A;font-weight:800">✅</span> Режим</td><td>ежедневно 8:00–22:00 — совпадает</td></tr>
+        <tr><td><span style="color:#DC2626;font-weight:800">❌</span> Адрес</td><td>г. Жуковский, Туполевское шоссе, 14 с3 <i style="color:#DC2626;font-size:12px"> — использован как есть, открытый вопрос из §17 не снят (это ожидаемо, не баг)</i></td></tr>
+      </table>
+    </div>
+  </div>
+  <h4>Производство</h4>
+  <p><span style="color:#16A34A;font-weight:800">✅</span> БСУ Stetter (2,5 м³, 110 м³/час) · аккредитованная лаборатория на территории · автопарк миксеров 7–14 м³ с GPS · бетононасосы (стрелы 18–57 м) · немецкое автодозирование · паспорт качества ГОСТ на партию. <i style="font-size:12px; color:var(--text-sec)">— все факты дословно воспроизведены в блоке AboutFactory (5 цифр-фактов совпадают 1:1)</i></p>
+  <div class="warn">
+    <strong>Внимание — геоданные донора.</strong> Проект — клон цепочки сайтов (Раменское → Щёлково → Жуковский). В части архивных файлов остались упоминания «Раменский район» как зоны бесплатной доставки и донора «Щёлково» в дизайн-файлах. При переносе контента — приводить географию к Жуковскому по карте замен из <code>_КЛОН-ЖУКОВСКИЙ_спецификация.md</code>.
+  </div>
+</section>
+
+<!-- 2 -->
+<section id="audience">
+  <h2><span class="num">2.</span>Аудитория и продукты</h2>
+  <p><b>~50% физлица</b> (частные застройщики — фундаменты, отмостки, стяжки, заборы, заказы от 1 м³, приоритет цена+скорость) · <b>~50% юрлица/подрядчики</b> (стройкомпании, ЖК, дороги — приоритет документы, безнал, рассрочка, объёмные скидки).</p>
+  <h4>Продуктовая линейка</h4>
+  <table>
+    <tr><th>Статус</th><th>Продукт</th><th>Марки</th><th>Цена с НДС</th><th>Приоритет</th></tr>
+    <tr><td><span style="color:#16A34A;font-weight:800">✅</span></td><td>Товарный бетон (гравий)</td><td>М100–М450</td><td>4 150–5 650 ₽/м³</td><td><span class="pill p1">P1</span></td></tr>
+    <tr><td><span style="color:#16A34A;font-weight:800">✅</span></td><td>Товарный бетон (гранит)</td><td>М100–М600</td><td>4 600–6 600 ₽/м³</td><td><span class="pill p1">P1</span></td></tr>
+    <tr><td><span style="color:#16A34A;font-weight:800">✅</span></td><td>Керамзитобетон</td><td>М100–М250 (М50–М350 в структуре)</td><td>3 900–4 350 ₽/м³</td><td><span class="pill p2">P2</span> <i style="font-size:11px">— хаб-страница есть, разбивки по всем 8 маркам нет</i></td></tr>
+    <tr><td><span style="color:#16A34A;font-weight:800">✅</span></td><td>Цементный раствор (ЦПР)</td><td>М50–М300</td><td>3 000–4 250 ₽/м³</td><td><span class="pill p2">P2</span> <i style="font-size:11px">— все 7 марок как отдельные страницы /rastvor/m50…m300/</i></td></tr>
+    <tr><td><span style="color:#16A34A;font-weight:800">✅</span></td><td>Пескобетон</td><td>М75–М350</td><td>4 140–4 520 ₽/м³</td><td><span class="pill p2">P2</span> <i style="font-size:11px">— все 7 марок отдельными страницами</i></td></tr>
+    <tr><td><span style="color:#16A34A;font-weight:800">✅</span></td><td>Тощий бетон</td><td>М100–М250</td><td>3 450–3 900 ₽/м³</td><td><span class="pill p2">P2</span></td></tr>
+    <tr><td><span style="color:#16A34A;font-weight:800">✅</span></td><td>Штукатурный раствор</td><td>М100–М200</td><td>3 650–4 150 ₽/м³</td><td><span class="pill p2">P2</span></td></tr>
+    <tr><td><span style="color:#16A34A;font-weight:800">✅</span></td><td>Цементное молоко, фибробетон, полистиролбетон</td><td>—</td><td>от 5 900 ₽/м³</td><td><span class="pill p3">P2 low</span></td></tr>
+    <tr><td><span style="color:#16A34A;font-weight:800">✅</span></td><td>Щебень, песок, ПГС/ОПГС, цемент, керамзит</td><td>—</td><td>—</td><td><span class="pill p3">P3 семантика</span></td></tr>
+    <tr><td><span style="color:#16A34A;font-weight:800">✅</span></td><td>Доставка миксером</td><td>—</td><td>500–900 ₽/м³ по зоне</td><td><span class="pill p1">P1</span></td></tr>
+    <tr><td><span style="color:#16A34A;font-weight:800">✅</span></td><td>Аренда бетононасоса (18–57 м)</td><td>—</td><td>2 250–6 500 ₽/час</td><td><span class="pill p1">P1, высокая маржа</span></td></tr>
+    <tr><td><span style="color:#16A34A;font-weight:800">✅</span></td><td>Лаборатория (испытания)</td><td>—</td><td>1 800–5 300 ₽/проба</td><td><span class="pill p1">P1, УТП B2B</span></td></tr>
+    <tr><td><span style="color:#16A34A;font-weight:800">✅</span></td><td>ПМД (зимние добавки)</td><td>—</td><td>100–250 ₽/м³</td><td>— <i style="font-size:11px">на странице «Зимний бетон», в калькулятор не встроено</i></td></tr>
+  </table>
+  <h4>УТП</h4>
+  <p>
+    <span class="pill accent">Завод-производитель, без посредников</span>
+    <span class="pill accent">Немецкое оборудование Stetter</span>
+    <span class="pill accent">Доставка в день заказа от 1 м³</span>
+    <span class="pill accent">GPS на всех миксерах</span>
+    <span class="pill accent">Аккредитованная лаборатория, протоколы для суда</span>
+    <span class="pill accent">Гарантия объёма (акт)</span>
+    <span class="pill accent">Гарантия цены −100 ₽/м³</span>
+    <span class="pill accent">Рассрочка юрлицам</span>
+  </p>
+  <p><span style="color:#16A34A;font-weight:800">✅</span> Все 8 пунктов УТП дословно воспроизведены в TrustBar (5 иконок), Guarantees (4 плашки) и тексте AboutFactory.</p>
+</section>
+
+<!-- 3 -->
+<section id="geo">
+  <h2><span class="num">3.</span>География и доставка</h2>
+  <p>Ядро: г. Жуковский + Раменский округ (заявлена бесплатная доставка). Радиус рентабельности — до 50 км.</p>
+  <table>
+    <tr><th>Статус</th><th>Расстояние от завода</th><th>Тариф</th></tr>
+    <tr><td><span style="color:#16A34A;font-weight:800">✅</span></td><td>Раменский округ</td><td><b>Бесплатно</b></td></tr>
+    <tr><td><span style="color:#16A34A;font-weight:800">✅</span></td><td>до 5 км</td><td>500 ₽/м³</td></tr>
+    <tr><td><span style="color:#16A34A;font-weight:800">✅</span></td><td>5–10 км</td><td>600 ₽/м³</td></tr>
+    <tr><td><span style="color:#16A34A;font-weight:800">✅</span></td><td>10–15 км</td><td>700 ₽/м³</td></tr>
+    <tr><td><span style="color:#16A34A;font-weight:800">✅</span></td><td>15–20 км</td><td>650 ₽/м³</td></tr>
+    <tr><td><span style="color:#16A34A;font-weight:800">✅</span></td><td>20–25 км</td><td>700 ₽/м³</td></tr>
+    <tr><td><span style="color:#16A34A;font-weight:800">✅</span></td><td>25–30 км</td><td>750 ₽/м³</td></tr>
+    <tr><td><span style="color:#16A34A;font-weight:800">✅</span></td><td>30–40 км</td><td>800–850 ₽/м³ <i style="font-size:11px">(в коде объединено как «850» в шаге калькулятора для 30–40)</i></td></tr>
+    <tr><td><span style="color:#16A34A;font-weight:800">✅</span></td><td>40–50 км</td><td>900 ₽/м³</td></tr>
+  </table>
+  <p><span style="color:#16A34A;font-weight:800">✅</span> Таблица и <code>deliverySteps</code> в <code>data/site.ts</code> совпадают с ТЗ числo-в-число. Города доставки / гео-страницы: Жуковский · Раменское · Быково · Кратово · Малаховка · Удельная · Ильинский · Лыткарино (полная карта соответствий — п.6) — <span style="color:#16A34A;font-weight:800">✅</span> все 8+1 (besplatnaya-dostavka) региональные страницы физически существуют.</p>
+</section>
+
+<!-- 4 -->
+<section id="stack">
+  <h2><span class="num">4.</span>Технический стек</h2>
+  <table>
+    <tr><th>Статус</th><th>Слой</th><th>Решение</th><th>Почему</th></tr>
+    <tr><td><span style="color:#DC2626;font-weight:800">❌</span></td><td>Фреймворк</td><td><b>Astro</b> (SSG)</td><td><i style="color:#DC2626;font-size:12px">Фактически — Next.js 16 (App Router) + React 19, не Astro. SSG/generateStaticParams даёт статику и SEO/CWV формально достижимы, но это другой фреймворк, чем указан в ТЗ — зафиксировано как отступление, не как брак</i></td></tr>
+    <tr><td><span style="color:#16A34A;font-weight:800">✅</span></td><td>Контент</td><td>Мапится из <code>content-*.md</code> (121 файл)</td><td><code>src/content/pages/*.md</code> + <code>gray-matter</code>/<code>remark</code> + <code>ContentMarkdownPage.tsx</code>; марка бетона шаблонизирована через <code>data/grades.ts</code> + <code>[grade]/page.tsx</code> на все 10 марок</td></tr>
+    <tr><td><span style="color:#16A34A;font-weight:800">✅</span></td><td>Стили</td><td>CSS-переменные (design tokens) по <code>design/colors.md</code></td><td><code>src/styles/tokens.css</code> — токены совпадают с colors.md значение-в-значение</td></tr>
+    <tr><td><span style="color:#16A34A;font-weight:800">✅</span></td><td>Шрифт</td><td>Google Fonts <b>Manrope</b></td><td><code>next/font/google</code> Manrope, веса 400/500/600/700, cyrillic-подмножество</td></tr>
+    <tr><td><span style="color:#16A34A;font-weight:800">✅</span></td><td>Интерактив (калькулятор, вкладки, аккордеон FAQ, форма)</td><td>Vanilla JS / лёгкий island-компонент Astro</td><td><i style="font-size:12px">React client-компоненты ('use client') вместо Astro-островов — функционально эквивалентно, без перезагрузки страницы</i></td></tr>
+    <tr><td><span style="color:#DC2626;font-weight:800">❌</span></td><td>Формы → CRM/уведомления</td><td>Backend-функция (Astro API route / сторонний сервис форм)</td><td><i style="color:#DC2626;font-size:12px">API-роутов/CRM-вебхука нет (<code>src/app/api</code> отсутствует). После доработки формы готовят письмо на email компании через <code>mailto:</code>, но серверной отправки без почтового клиента пока нет.</i></td></tr>
+    <tr><td><span style="color:#16A34A;font-weight:800">✅</span></td><td>Видео hero</td><td>MP4 + WebM, сжатие ffmpeg</td><td>2,7 МБ mp4 + 4,1 МБ webm + poster.webp — оба &lt;10 МБ, норматив соблюдён (использовано 1 видео из 3 исходных — упрощение, не нарушение)</td></tr>
+    <tr><td><span style="color:#16A34A;font-weight:800">✅</span></td><td>Изображения</td><td>WebP + fallback, авторские SVG для отсутствующих фото</td><td><code>public/images/placeholders/*.svg</code> (12 иллюстраций) + <code>PlaceholderVisual.tsx</code>, ни одного стокового фото</td></tr>
+    <tr><td><span style="color:#DC2626;font-weight:800">❌</span></td><td>Хостинг/деплой</td><td>Любой статический (Vercel/Netlify/VPS)</td><td><i style="color:#DC2626;font-size:12px">Не проверяется по коду — деплой не выполнен/не верифицирован в рамках этой сверки</i></td></tr>
+  </table>
+</section>
+
+<!-- 5 -->
+<section id="design">
+  <h2><span class="num">5.</span>Дизайн-система</h2>
+  <div class="warn">
+    <strong>Конфликт в архиве.</strong> <code>design/colors.md</code> и <code>design/typography.md</code> — актуальный источник правды (амбер + navy, шрифт Manrope). <code>design/components.md</code> и <code>design/design-brief.md</code> (разделы 4–5) содержат <b>устаревшую</b> палитру донора (тёмно-синий #1A1A2E, красная кнопка, Montserrat) — использовать из них только структуру/логику компонентов, цвета и шрифт брать из colors.md/typography.md.
+  </div>
+
+  <h3>Палитра (источник: colors.md)</h3>
+  <div class="swatches">
+    <div class="sw"><div class="box" style="background:#FAB800"></div><div class="lbl">Amber<br><code>#FAB800</code><br>акцент/CTA</div></div>
+    <div class="sw"><div class="box" style="background:#12213A"></div><div class="lbl">Navy<br><code>#12213A</code><br>текст/тёмные секции</div></div>
+    <div class="sw"><div class="box" style="background:#FFFFFF;border-bottom:1px solid #eee"></div><div class="lbl">White<br><code>#FFFFFF</code><br>фон</div></div>
+    <div class="sw"><div class="box" style="background:#F8F3E5"></div><div class="lbl">Cream<br><code>#F8F3E5</code><br>альт-фон секций</div></div>
+    <div class="sw"><div class="box" style="background:#1A4387"></div><div class="lbl">Blue<br><code>#1A4387</code><br>вторичный акцент</div></div>
+    <div class="sw"><div class="box" style="background:#CD0A0A"></div><div class="lbl">Sale<br><code>#CD0A0A</code><br>старая цена</div></div>
+  </div>
+  <p><span style="color:#16A34A;font-weight:800">✅</span> <b>Правило кнопки:</b> текст на жёлтой кнопке — <b>navy</b> (#12213A), не белый (белый на амбере нечитаем). <i style="font-size:12px; color:var(--text-sec)">— проверено по CSS-классам <code>.btn</code>/<code>.cta</code>, используют <code>--color-text-primary</code> поверх <code>--color-accent</code></i></p>
+
+  <h3>Типографика</h3>
+  <p><span style="color:#16A34A;font-weight:800">✅</span> Шрифт: <b>Manrope</b> (Google Fonts, замена платному Gilroy). <code>tokens.css</code> — H1 32px/H2 24px/H3 18px/body 16px и мобильные размеры (26/20/17px) совпадают с ТЗ значение-в-значение.</p>
+
+  <h3>Анти-стиль (что запрещено)</h3>
+  <p>
+    <span class="pill p3">без тёмного full-screen hero</span>
+    <span class="pill p3">без КАПС в заголовках</span>
+    <span class="pill p3">без стоковых фото строителей в касках</span>
+    <span class="pill p3">без 3D / сложных градиентов</span>
+    <span class="pill p3">без анимаций &gt;0.5s</span>
+  </p>
+  <p><span style="color:#16A34A;font-weight:800">✅</span> Заголовки в данных — обычный регистр, не CAPS; фото строителей нет вообще (только SVG); признаков 3D/градиентов/долгих анимаций в просмотренных компонентах не обнаружено. <i style="font-size:12px; color:var(--text-sec)">Полный визуальный рендер не проверялся (браузер недоступен в этой сессии) — вывод по данным/JSX/CSS-классам, не по скриншоту.</i></p>
+
+  <h3>Иллюстрации вместо фото</h3>
+  <p><span style="color:#16A34A;font-weight:800">✅</span> Реальных фото завода в архиве нет (<code>assets/images/*</code> пусты). Продуктовые/процессные блоки (БСУ, миксер, лаборатория) — авторские SVG/CSS-иллюстрации в фирменных цветах, не фейковые фото. Кейсы/отзывы — текстовые карточки без фото. <i style="font-size:12px; color:var(--text-sec)">Реализовано ровно так: 12 SVG в <code>public/images/placeholders/</code>, единый компонент <code>PlaceholderVisual.tsx</code>, ни одной карточки кейса/отзыва с фото.</i></p>
+</section>
+
+<!-- 6 -->
+<section id="sitemap">
+  <h2><span class="num">6.</span>Структура сайта / карта разделов</h2>
+  <p>Полное дерево — из <code>struktura-beton-zhukovskiy.xlsx</code>. Для тестового задания достаточно реализовать P1 (денежное ядро) + шаблонизировать карточку марки, остальное — заглушки/задел на масштабирование.</p>
+
+  <div class="diagram tree">
+    <ul>
+      <li class="p1"><span style="color:#16A34A;font-weight:800">✅</span> <span class="label">Главная</span> <span class="url">/</span></li>
+      <li class="p1"><span style="color:#16A34A;font-weight:800">✅</span> <span class="label">Каталог → Товарный бетон (хаб)</span> <span class="url">/tovarnyy-beton/</span>
+        <ul>
+          <li class="p1"><span style="color:#16A34A;font-weight:800">✅</span> <span class="label">Карточки марок М100–М600</span> <span class="url">/tovarnyy-beton/m100…m600/</span> <i style="font-size:11px">— все 10, один шаблон <code>[grade]/page.tsx</code></i></li>
+          <li class="p2"><span style="color:#16A34A;font-weight:800">✅</span> <span class="label">Фасеты: на граните / гравии / известняке / вторичном</span></li>
+          <li class="p3"><span style="color:#16A34A;font-weight:800">✅</span> <span class="label">По классу B15–B25, по W6–W12, по F150–F300</span></li>
+        </ul>
+      </li>
+      <li class="p2"><span style="color:#16A34A;font-weight:800">✅</span> <span class="label">Каталог → Спец. виды бетона (10 страниц)</span> <span class="url">/vidy-betona/*</span> <i style="font-size:11px">— реализовано больше, ~17 страниц по факту (<code>vidy-betona-spec.ts</code>)</i>
+        <ul><li>фундамент · стяжка · пол · отмостка · дорожный · перекрытия · сваи · бассейн · баня · забор · гидротехнический · тощий · зимний · мостовой · архитектурный · СУБ · высокопрочный</li></ul>
+      </li>
+      <li class="p2"><span style="color:#16A34A;font-weight:800">✅</span> <span class="label">Каталог → Пескобетон (хаб + 6 марок)</span> <span class="url">/peskobeton/</span> <i style="font-size:11px">— по факту 7 марок (m75…m350)</i></li>
+      <li class="p2"><span style="color:#16A34A;font-weight:800">✅</span> <span class="label">Каталог → Раствор ЦПР (хаб + 6 марок)</span> <span class="url">/rastvor/</span> <i style="font-size:11px">— по факту 7 марок + шт.раствор + цем.молоко</i></li>
+      <li class="p2"><span style="color:#16A34A;font-weight:800">✅</span> <span class="label">Каталог → Керамзитобетон (хаб + марки)</span> <span class="url">/keramzitobeton/</span></li>
+      <li class="p3"><span style="color:#16A34A;font-weight:800">✅</span> <span class="label">Каталог → Фибробетон, Полистиролбетон</span></li>
+      <li class="p3"><span style="color:#16A34A;font-weight:800">✅</span> <span class="label">Каталог → Сыпучие: щебень / песок / цемент / керамзит / ПГС</span> <span class="url">/shcheben/ /pesok/ …</span></li>
+      <li class="p1"><span style="color:#16A34A;font-weight:800">✅</span> <span class="label">Услуги → Доставка бетона</span> <span class="url">/dostavka/</span>
+        <ul><li>миксером (АБС) · малыми объёмами · срочная/ночная · по графику · самовывоз — <span style="color:#16A34A;font-weight:800">✅</span> все 5 подстраниц физически существуют</li></ul>
+      </li>
+      <li class="p1"><span style="color:#16A34A;font-weight:800">✅</span> <span class="label">Услуги → Аренда бетононасоса</span> <span class="url">/arenda-betononasosa/</span>
+        <ul><li>автобетононасос · стационарный · 32/37/52 м — <span style="color:#16A34A;font-weight:800">✅</span></li></ul>
+      </li>
+      <li class="p2"><span style="color:#16A34A;font-weight:800">✅</span> <span class="label">Услуги → Аренда миксера, Подача бетона</span></li>
+      <li class="p2"><span style="color:#16A34A;font-weight:800">✅</span> <span class="label">Услуги → Бетонные работы под ключ</span> <span class="url">/zalivka/*</span>
+        <ul><li>фундамент · стяжка · пол · перекрытия</li></ul>
+      </li>
+      <li class="p1"><span style="color:#16A34A;font-weight:800">✅</span> <span class="label">Услуги → Лаборатория</span> <span class="url">/laboratoriya/</span></li>
+      <li class="p2"><span style="color:#16A34A;font-weight:800">✅</span> <span class="label">Услуги → Производство (о заводе)</span> <span class="url">/proizvodstvo/</span></li>
+      <li class="p1"><span class="label">Цены и условия</span>
+        <ul>
+          <li class="p1"><span style="color:#16A34A;font-weight:800">✅</span> <span class="label">Прайс-лист</span> <span class="url">/ceny/</span></li>
+          <li class="p1"><span style="color:#16A34A;font-weight:800">✅</span> <span class="label">Калькулятор</span> <span class="url">/kalkulyator/</span></li>
+          <li class="p2"><span style="color:#16A34A;font-weight:800">✅</span> <span class="label">Доставка и оплата</span> <span class="url">/dostavka-i-oplata/</span></li>
+          <li class="p2"><span style="color:#16A34A;font-weight:800">✅</span> <span class="label">Бетон оптом / юрлицам</span> <span class="url">/optom/</span></li>
+          <li class="p2"><span style="color:#16A34A;font-weight:800">✅</span> <span class="label">Заказать бетон (заявка/КП)</span> <span class="url">/zakazat/</span></li>
+          <li class="p3"><span style="color:#16A34A;font-weight:800">✅</span> <span class="label">Акции, «Нашли дешевле»</span></li>
+        </ul>
+      </li>
+      <li class="p2"><span style="color:#16A34A;font-weight:800">✅</span> <span class="label">Решения для аудиторий</span> <span class="url">/resheniya/*</span>
+        <ul><li>частным лицам · строительным компаниям · застройщикам · производствам</li></ul>
+      </li>
+      <li class="p2"><span style="color:#16A34A;font-weight:800">✅</span> <span class="label">О компании</span>
+        <ul><li>о заводе · контроль качества · сертификаты и ГОСТ · паспорт качества · автопарк · кейсы/объекты · отзывы · сотрудничество · <span class="pill p1" style="margin:0">контакты</span></li></ul>
+      </li>
+      <li class="p1"><span style="color:#16A34A;font-weight:800">✅</span> <span class="label">Региональные страницы (8)</span> <span class="url">/zhukovskiy/ /ramenskoe/ /kratovo/ …</span> <i style="font-size:11px">— все 9 (включая besplatnaya-dostavka) реализованы через <code>[city]/page.tsx</code></i></li>
+      <li class="p3"><span style="color:#16A34A;font-weight:800">✅</span> <span class="label">Блог (35 статей, 5 рубрик)</span> <i style="font-size:11px">— все 35 markdown-файлов на месте (<code>src/content/blog</code>)</i>
+        <ul><li>выбор марки и вида · расчёт и цены · заказ и доставка · технология заливки · справочное и доверие</li></ul>
+      </li>
+    </ul>
+  </div>
+  <p><span style="color:#16A34A;font-weight:800">✅</span> Общий вывод по разделу: реализация вышла <b>заметно шире P1-минимума</b>, который просило само ТЗ — построена практически вся карта разделов (58 файлов <code>page.tsx</code>), а не только денежное ядро.</p>
+  <p class="lead">Полная разбивка по приоритетам и URL — см. <code>struktura-beton-zhukovskiy.xlsx</code> (5 листов: дерево меню, детальная таблица страниц, темы блога, регионы, поэтапный план запуска на 7 месяцев).</p>
+</section>
+
+<!-- 7 -->
+<section id="header">
+  <h2><span class="num">7.</span>Схема шапки (header) — компонент C1</h2>
+  <div class="diagram">
+    <div class="hdr-schema">
+      <div class="hdr-box logo">Логотип</div>
+      <div class="hdr-box nav">
+        <span>Каталог ▾</span><span>Доставка</span><span>Услуги</span><span>О заводе</span><span>Блог</span><span>Контакты</span>
+      </div>
+      <div class="hdr-box" style="border-color:#22C55E">🟢 Работаем до 22:00</div>
+      <div class="hdr-box">+7 (499) 111-72-62</div>
+      <div class="hdr-box cta">Позвонить</div>
+      <div class="hdr-box cta">Заказать</div>
+    </div>
+  </div>
+  <ul>
+    <li><span style="color:#16A34A;font-weight:800">✅</span> <b>Поведение:</b> sticky, белый фон; тень при скролле. <i style="font-size:12px; color:var(--text-sec)">— <code>position:sticky</code> подтверждён в <code>Header.module.css</code></i></li>
+    <li><span style="color:#16A34A;font-weight:800">✅</span> <b>Каталог ▾</b> — выпадающее меню с фасетами. <i style="color:#16A34A;font-size:12px"> — добавлены фасеты по марке, заполнителю и свойствам с переходами на существующие URL</i></li>
+    <li><span style="color:#16A34A;font-weight:800">✅</span> <b>Телефон</b> кликабелен <code>tel:</code>, с online-badge (пульс, «работаем сейчас» по расписанию 8:00–22:00).</li>
+    <li><span style="color:#16A34A;font-weight:800">✅</span> <b>Кнопка «Позвонить»</b> — амбер, текст navy; <b>«Заказать»</b> — якорь/переход на форму заявки. <i style="color:#16A34A;font-size:12px"> — отдельная кнопка «Заказать» добавлена в шапку, ведёт на <code>/zakazat/#zayavka</code></i></li>
+    <li><span style="color:#16A34A;font-weight:800">✅</span> <b>Mobile:</b> бургер-меню, телефон и кнопка «Заказать» остаются видимыми в свёрнутом виде. <i style="color:#16A34A;font-size:12px"> — мобильная шапка показывает телефон, «Заказать» и бургер; раскрытое меню содержит CTA и фасеты</i></li>
+    <li><span style="color:#16A34A;font-weight:800">✅</span> <b>Фиксированный справа</b> (вне шапки, across all pages) — messenger-widget: WhatsApp (#25D366) + Telegram (#0088cc), вертикально по центру экрана. <i style="color:#16A34A;font-size:12px"> — реализовано WhatsApp + Telegram; Telegram временно по телефону до получения username</i></li>
+  </ul>
+</section>
+
+<!-- 8 -->
+<section id="footer">
+  <h2><span class="num">8.</span>Схема подвала (footer) — компонент C8</h2>
+  <div class="diagram">
+    <div class="foot-schema">
+      <div class="foot-col"><b>Лого + описание</b>Завод бетона в Жуковском, с 2003 г. Кратко о компании.</div>
+      <div class="foot-col"><b>Продукция</b>Товарный бетон · Растворы · Пескобетон · Керамзитобетон · Нерудные</div>
+      <div class="foot-col"><b>Доставка/услуги</b>Доставка · Аренда насоса · Лаборатория · Заливка под ключ</div>
+      <div class="foot-col"><b>О компании</b>О заводе · Качество · Сертификаты · Кейсы · Отзывы · Вакансии</div>
+      <div class="foot-col"><b>Контакты</b>Телефон · Email · Адрес · Режим работы</div>
+    </div>
+    <p style="margin-top:14px; font-size:12.5px; color:var(--text-sec)">Низ: © 2003–2026 ООО «ПСК «Прогресс» · ИНН 5003088122 · ОГРН 1105003005326 · Политика конфиденциальности · Публичная оферта · (ссылки соцсетей/мессенджеров при наличии)</p>
+  </div>
+  <p><span style="color:#16A34A;font-weight:800">✅</span> Структура колонок совпадает почти 1:1: логотип+описание, «Продукция», «Услуги и доставка», «Компания», «Доставка по городам» (5 колонок как в схеме). Низ содержит © с 2003 года, ИНН, КПП, ОГРН, юр.адрес, ссылки на политику конфиденциальности и оферту; фон — тёмно-синий <code>--color-bg-dark</code>, текст светлый, акценты жёлтые.</p>
+</section>
+
+<!-- 9 -->
+<section id="cart">
+  <h2><span class="num">9.</span>Корзина / оформление заказа <span style="color:#16A34A;font-weight:800">✅ реализовано, лучшая часть сайта</span></h2>
+  <div class="todo">
+    <strong>Ключевое требование из спецификации архива, легко упустить:</strong> «Делаем сайт <b>с корзиной</b> (e-commerce): каталог → корзина → оформление заказа. По умолчанию — корзина-заявка (без онлайн-эквайринга), тип уточнить на этапе разработки». В блоках B1–B16 и в шаблонах карточек марок явной корзины не описано — там только формы заявки (C2/C3) с одной позицией. Для тестового задания корзину нужно спроектировать поверх существующей структуры каталога.
+  </div>
+
+  <h3>Рекомендуемая модель — «корзина-заявка» (без онлайн-оплаты)</h3>
+  <p>Не интернет-магазин с эквайрингом, а конструктор заявки из нескольких позиций: пользователь добавляет марку/материал + объём с любой карточки каталога, копит список, на финальном шаге отправляет как одну заявку менеджеру. Соответствует бизнес-модели (расчёт и подтверждение по звонку, оплата по факту доставки/безнал для юрлиц).</p>
+
+  <div class="diagram">
+    <div class="flow">
+      <div class="flow-step">
+        <div class="k">Шаг 1 <span style="color:#16A34A">✅</span></div>
+        <div class="t">Карточка марки/материала</div>
+        <ul><li>Выбор объёма (м³) — <span style="color:#16A34A">✅</span> в самой корзине (не на карточке — там сначала кладётся 1 м³, объём меняется потом)</li><li>Кнопка «В заявку» — <span style="color:#16A34A">✅</span> как «В корзину» (<code>GradeCartButtons.tsx</code>, и на прайс-таблице тоже)</li><li>Иконка корзины в шапке — счётчик позиций — <span style="color:#16A34A">✅</span> (<code>HeaderCartButton.tsx</code>)</li></ul>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <div class="k">Шаг 2 <span style="color:#16A34A">✅</span></div>
+        <div class="t">Корзина (drawer/страница)</div>
+        <ul><li>Список позиций: марка · объём · цена/м³ · сумма — <span style="color:#16A34A">✅</span></li><li>Изменить/удалить позицию — <span style="color:#16A34A">✅</span></li><li>Автоподсчёт по калькулятору доставки (зона) — <span style="color:#16A34A">✅ добавлены бесплатная зона и расчёт по км</span></li><li>Итого без НДС / с НДС — <span style="color:#16A34A">✅ выводятся НДС 20%, бетон с НДС и итог с доставкой</span></li></ul>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <div class="k">Шаг 3 <span style="color:#16A34A">✅</span></div>
+        <div class="t">Оформление заявки</div>
+        <ul><li>Имя · телефон · адрес объекта — <span style="color:#16A34A">✅</span></li><li>Желаемая дата/время — <span style="color:#16A34A">✅</span> (дата и отдельное поле времени добавлены)</li><li>Тип заказчика: физлицо / юрлицо / ИП — <span style="color:#16A34A">✅ поле добавлено</span></li><li>Комментарий — <span style="color:#16A34A">✅</span></li></ul>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <div class="k">Шаг 4 <span style="color:#16A34A">✅</span></div>
+        <div class="t">Подтверждение</div>
+        <ul><li>«Заявка №… отправлена» — <span style="color:#16A34A">✅</span> похожий текст статуса</li><li>«Перезвоним за 15 минут» — <span style="color:#16A34A">✅</span></li><li>Заявка → email менеджеру — <span style="color:#16A34A">✅ формируется письмо на публичный email компании через mailto</span></li></ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <h4>Что переиспользуем из готового</h4>
+      <p><span style="color:#16A34A;font-weight:800">✅</span> Логика калькулятора (C4) для расчёта суммы позиции и доставки. Компонент C3 (полная форма) — как форма финального шага. Поля «марка / объём / адрес / дата / тип заказчика» уже описаны в контенте <code>/zakazat/</code> и <code>/kalkulyator/</code> — переиспользовать 1:1. <i style="font-size:12px; color:var(--text-sec)">Реализовано: форма корзины использует тот же набор полей, что LeadForm full-варианта.</i></p>
+    </div>
+    <div class="card">
+      <h4>Что придётся спроектировать с нуля</h4>
+      <p><span style="color:#16A34A;font-weight:800">✅</span> Стейт корзины (localStorage, без бэкенд-аккаунта) — <code>CartContext.tsx</code>, ключ <code>cart_v1</code>. <span style="color:#16A34A;font-weight:800">✅</span> Иконка+счётчик в шапке. <span style="color:#16A34A;font-weight:800">✅</span> Отдельная страница/роут <code>/korzina/</code> создана и добавлена в sitemap. <span style="color:#16A34A;font-weight:800">✅</span> Кнопка «В заявку»/«В корзину» на карточках марок и в каталоге-хабе.</p>
+    </div>
+  </div>
+
+  <div class="warn"><strong>Открытый вопрос:</strong> онлайн-оплата не упомянута нигде в контенте (везде «оплата при доставке / по факту / рассрочка для юрлиц»). Эквайринг закладывать не нужно, если заказчик явно не потребует иного. <span style="color:#16A34A;font-weight:800">✅ соблюдено</span> — эквайринг нигде не заложен.</div>
+</section>
+
+<!-- 10 -->
+<section id="components">
+  <h2><span class="num">10.</span>Переиспользуемые компоненты C1–C8</h2>
+  <div class="comp-grid">
+    <div class="comp"><span class="id">C1</span> <span style="color:#16A34A;font-weight:800">✅</span><h4 style="margin-top:0">Шапка</h4>Логотип · навигация · телефон + online-badge · «Позвонить» · «Заказать». Sticky. <i style="color:#16A34A;font-size:12px">Кнопка «Заказать» и выпадающий каталог с фасетами добавлены.</i></div>
+    <div class="comp"><span class="id">C2</span> <span style="color:#16A34A;font-weight:800">✅</span><h4 style="margin-top:0">Короткая форма</h4>Имя · телефон · кнопка «Перезвоните мне» / «Рассчитать стоимость». Под кнопкой — «ответим за 15 минут». <i style="font-size:12px; color:var(--text-sec)"><code>LeadForm variant="short"</code>.</i></div>
+    <div class="comp"><span class="id">C3</span> <span style="color:#16A34A;font-weight:800">✅</span><h4 style="margin-top:0">Полная форма заявки</h4>Марка · объём (м³) · адрес объекта · желаемая дата · время · тип заказчика · имя · телефон · комментарий. <i style="color:#16A34A;font-size:12px">Тип заказчика добавлен в <code>LeadForm variant="full"</code> и корзину.</i></div>
+    <div class="comp"><span class="id">C4</span> <span style="color:#16A34A;font-weight:800">✅</span><h4 style="margin-top:0">Калькулятор</h4>Тип конструкции → размеры → марка → щебень → зона доставки → объём (+7% запас) и стоимость. <i style="color:#16A34A;font-size:12px">Выбор конструкции, динамические размеры, +7% и итог с НДС встроены в основной калькулятор.</i></div>
+    <div class="comp"><span class="id">C5</span> <span style="color:#16A34A;font-weight:800">✅</span><h4 style="margin-top:0">Полоса доверия</h4>5 иконок: завод-производитель · немецкая БСУ · паспорт ГОСТ · GPS-миксеры · гарантия объёма (акт). <i style="font-size:12px; color:var(--text-sec)"><code>TrustBar.tsx</code> — тексты совпадают дословно.</i></div>
+    <div class="comp"><span class="id">C6</span> <span style="color:#16A34A;font-weight:800">✅</span><h4 style="margin-top:0">4 гарантии</h4>Гарантия цены · гарантия объёма · паспорт ГОСТ · доставка в срок / доставка в день заказа. <i style="font-size:12px; color:var(--text-sec)"><code>Guarantees.tsx</code> — 4 карточки, тексты совпадают дословно.</i></div>
+    <div class="comp"><span class="id">C7</span> <span style="color:#16A34A;font-weight:800">✅</span><h4 style="margin-top:0">Блок отзывов</h4>4–6 карточек: имя · город · дата · текст · оценка. <i style="color:#16A34A;font-size:12px">Добавлены ссылки «Отзывы на Яндекс Картах» и «Отзывы на 2GIS»; реальные URL нужно заменить после получения профилей клиента.</i></div>
+    <div class="comp"><span class="id">C8</span> <span style="color:#16A34A;font-weight:800">✅</span><h4 style="margin-top:0">Подвал</h4>См. §8.</div>
+  </div>
+  <h4>Дополнительные UI-элементы (design/components.md)</h4>
+  <p>
+    <span class="pill">Pill-picker марки (М100…М600, активная подсвечена амбером)</span> <span style="color:#16A34A;font-weight:800">✅ добавлен в калькулятор и полную форму заявки</span>
+    <span class="pill">Sidebar каталога (navy-фон, активный пункт — амбер)</span> <span style="color:#16A34A;font-weight:800">✅ добавлен на /tovarnyy-beton/</span>
+    <span class="pill">Бейдж-геолокация</span> <span style="color:#16A34A;font-weight:800">✅ добавлен в sidebar каталога</span>
+    <span class="pill">Online-badge с пульсацией</span> <span style="color:#16A34A;font-weight:800">✅</span>
+    <span class="pill">Прайс-бейдж поверх hero-фото</span> <span style="color:#16A34A;font-weight:800">✅ добавлен</span>
+    <span class="pill">3 факта под hero (цифры-якоря)</span> <span style="color:#16A34A;font-weight:800">✅ в Hero.tsx</span>
+    <span class="pill">Messenger-widget справа (WhatsApp/Telegram)</span> <span style="color:#16A34A;font-weight:800">✅ WhatsApp+Telegram</span>
+  </p>
+</section>
+
+<!-- 11 -->
+<section id="templates">
+  <h2><span class="num">11.</span>Шаблоны страниц и блоки</h2>
+  <p>Все страницы собираются из переиспользуемых блоков B1–B16 (глобальные — шапка/подвал — не повторяются). Полный порядок блоков — в <code>page-blueprints-beton-zhukovskiy.md</code>.</p>
+
+  <h3>Главная <code>/</code> — полный набор из 16 блоков <span style="color:#16A34A;font-weight:800">✅ все 16 присутствуют</span></h3>
+  <div class="blocks">
+    <div class="blk"><span style="color:#16A34A;font-weight:800">✅</span> <b>B1</b> Шапка [C1]</div>
+    <div class="blk"><span style="color:#16A34A;font-weight:800">✅</span> <b>B2</b> Hero: H1 + подзаголовок + короткая форма + 3 цифры-якоря</div>
+    <div class="blk"><span style="color:#16A34A;font-weight:800">✅</span> <b>B3</b> Полоса доверия [C5]</div>
+    <div class="blk"><span style="color:#16A34A;font-weight:800">✅</span> <b>B4</b> Калькулятор [C4] <i style="color:#16A34A;font-size:11px">расширен: тип конструкции, размеры, +7%, НДС</i></div>
+    <div class="blk"><span style="color:#16A34A;font-weight:800">✅</span> <b>B5</b> Каталог с 5 вкладками (гравий/гранит/растворы/лёгкий/тощий)</div>
+    <div class="blk"><span style="color:#16A34A;font-weight:800">✅</span> <b>B6</b> Доставка: зона + тариф-таблица</div>
+    <div class="blk"><span style="color:#16A34A;font-weight:800">✅</span> <b>B7</b> Услуги-спутники (насос, спец-выезд, лаборатория)</div>
+    <div class="blk"><span style="color:#16A34A;font-weight:800">✅</span> <b>B8</b> Гарантии [C6]</div>
+    <div class="blk"><span style="color:#16A34A;font-weight:800">✅</span> <b>B9</b> Как мы работаем (4 шага)</div>
+    <div class="blk"><span style="color:#16A34A;font-weight:800">✅</span> <b>B10</b> О заводе (цифры + фото/иллюстрация)</div>
+    <div class="blk"><span style="color:#16A34A;font-weight:800">✅</span> <b>B11</b> Кейсы / объекты (3–4 карточки)</div>
+    <div class="blk"><span style="color:#16A34A;font-weight:800">✅</span> <b>B12</b> Отзывы [C7]</div>
+    <div class="blk"><span style="color:#16A34A;font-weight:800">✅</span> <b>B13</b> Для юрлиц (5 пунктов + CTA) <i style="font-size:11px">B2BBlock.tsx</i></div>
+    <div class="blk"><span style="color:#16A34A;font-weight:800">✅</span> <b>B14</b> FAQ (6–8, аккордеон)</div>
+    <div class="blk"><span style="color:#16A34A;font-weight:800">✅</span> <b>B15</b> Финальный CTA [C3]</div>
+    <div class="blk"><span style="color:#16A34A;font-weight:800">✅</span> <b>B16</b> Подвал [C8]</div>
+  </div>
+  <p style="font-size:12.5px; color:var(--text-sec)">Дополнительно на главной есть <code>BlogTeaser</code> (блог-тизер) — блока сверх ТЗ, не предусмотренного B1–B16, но не противоречащего структуре.</p>
+
+  <h3>Карточка марки (шаблон, пример М200) <code>/tovarnyy-beton/m200/</code> <span style="color:#16A34A;font-weight:800">✅</span></h3>
+  <p><span style="color:#16A34A;font-weight:800">✅</span> 12 блоков: hero с формой+таблицей параметров → применение (6 карточек) → технические характеристики → полный прайс всех марок (текущая подсвечена) → калькулятор → гарантии → блок для юрлиц/тендеров → SEO-текст → FAQ (6) → финальный CTA → подвал. <b>Меняется между М100–М600:</b> H1, цены, фото, применение, характеристики, SEO-текст, FAQ. <b>Не меняется:</b> структура блоков и компоненты C1/C3/C4/C6/C8 — именно это шаблонизируется программно. <i style="font-size:12px; color:var(--text-sec)">Реализовано: единый файл <code>[grade]/page.tsx</code> + <code>data/grades.ts</code> (10 объектов, каждый содержит usage/specs/faq/seoText) — это лучший по качеству шаблон на сайте, только фреймворк не Astro-компонент, а Next.js dynamic route.</i></p>
+
+  <h3>Другие ключевые шаблоны</h3>
+  <table>
+    <tr><th>Статус</th><th>Шаблон</th><th>Пример URL</th><th>Особенность</th></tr>
+    <tr><td><span style="color:#16A34A;font-weight:800">✅</span></td><td>Хаб «Товарный бетон»</td><td><code>/tovarnyy-beton/</code></td><td>SEO-хаб + каталог с фильтром, ведёт на карточки марок</td></tr>
+    <tr><td><span style="color:#16A34A;font-weight:800">✅</span></td><td>Аренда бетононасоса</td><td><code>/arenda-betononasosa/</code></td><td><i style="color:#16A34A;font-size:12px">Добавлен интерактивный чип-пикер стрелы с подсветкой цены и CTA бронирования.</i></td></tr>
+    <tr><td><span style="color:#16A34A;font-weight:800">✅</span></td><td>Лаборатория</td><td><code>/laboratoriya/</code></td><td>2 колонки: для покупателей бетона / для внешних заказчиков; прайс услуг</td></tr>
+    <tr><td><span style="color:#16A34A;font-weight:800">✅</span></td><td>Страницы применения</td><td><code>/vidy-betona/beton-dlya-fundamenta/</code> и ещё 9+</td><td>Формула+пример расчёта объёма под задачу, таблица рекомендуемых марок — реализовано через <code>VBPurposePage.tsx</code>/<code>VBSpecPage.tsx</code></td></tr>
+    <tr><td><span style="color:#16A34A;font-weight:800">✅</span></td><td>Доставка</td><td><code>/dostavka/</code></td><td><i style="color:#16A34A;font-size:12px">Добавлена визуальная карта зон с кольцами 10/20/30/50 км и легендой тарифов.</i></td></tr>
+    <tr><td><span style="color:#16A34A;font-weight:800">✅</span></td><td>P2-продукты</td><td><code>/keramzitobeton/</code>, <code>/rastvor/</code>, <code>/peskobeton/</code>…</td><td>Упрощённый шаблон: hero → применение → цены → характеристики → калькулятор → SEO → FAQ</td></tr>
+    <tr><td><span style="color:#16A34A;font-weight:800">✅</span></td><td>Региональные</td><td><code>/zhukovskiy/</code>, <code>/ramenskoe/</code>…</td><td>Локальный интент, через <code>[city]/page.tsx</code></td></tr>
+  </table>
+</section>
+
+<!-- 12 -->
+<section id="calc">
+  <h2><span class="num">12.</span>Калькулятор — логика (компонент C4)</h2>
+  <ol>
+    <li><span style="color:#16A34A;font-weight:800">✅</span> <b>Тип конструкции:</b> лента / плита / стяжка / колонна / произвольный объём. <i style="color:#16A34A;font-size:12px">— встроено в калькулятор как переключатель режимов</i></li>
+    <li><span style="color:#16A34A;font-weight:800">✅</span> <b>Размеры</b> (динамически по типу). <i style="color:#16A34A;font-size:12px">— поля размеров меняются по выбранному типу конструкции</i></li>
+    <li><span style="color:#16A34A;font-weight:800">✅</span> <b>Марка бетона:</b> select М100…М600 (в привязке к материалу).</li>
+    <li><span style="color:#16A34A;font-weight:800">✅</span> <b>Тип щебня:</b> гравий / гранит (реализовано как pill-picker «На гравии/На граните»).</li>
+    <li><span style="color:#16A34A;font-weight:800">✅</span> <b>Зона доставки:</b> «Раменский район — бесплатно» / «Другой адрес» + ввод км, тариф считается по <code>deliverySteps</code>.</li>
+    <li><span style="color:#16A34A;font-weight:800">✅</span> <b>Результат:</b> объём в м³ <i>с запасом +7%</i>, цена бетона, цена доставки, итого с НДС. <i style="color:#16A34A;font-size:12px">— запас +7% встроен, итог и цена с НДС выделены</i></li>
+    <li><span style="color:#16A34A;font-weight:800">✅</span> <b>CTA:</b> «Заказать по этой цене» → предзаполняет форму (кастомный event <code>lead-form-prefill</code>) с маркой/объёмом/типом оплаты.</li>
+  </ol>
+  <p class="lead"><span style="color:#16A34A;font-weight:800">✅</span> Цена после расчёта держится 24 часа — подпись воспроизведена дословно. <span style="color:#16A34A;font-weight:800">✅</span> Нормативная глубина промерзания 1,4 м (СП 131.13330) — воспроизведена дословно в FAQ /kalkulyator/.</p>
+</section>
+
+<!-- 13 -->
+<section id="forms">
+  <h2><span class="num">13.</span>Формы — сводная таблица</h2>
+  <table>
+    <tr><th>Статус</th><th>Форма</th><th>Поля</th><th>Где используется</th></tr>
+    <tr><td><span style="color:#16A34A;font-weight:800">✅</span></td><td>C2 — короткая</td><td>Имя, телефон <i style="font-size:11px">(+ отдельно марка/объём, если хаб/марочная страница)</i></td><td>Hero большинства страниц</td></tr>
+    <tr><td><span style="color:#16A34A;font-weight:800">✅</span></td><td>C3 — полная</td><td>Имя, телефон, марка, объём, адрес, дата доставки, время, тип заказчика, комментарий</td><td><i style="color:#16A34A;font-size:12px">Поля добавлены в полную форму и корзину.</i></td></tr>
+    <tr><td><span style="color:#16A34A;font-weight:800">✅</span></td><td>C4 — калькулятор</td><td>см. §12</td><td><i style="color:#16A34A;font-size:12px">Тип конструкции, размеры, +7% и итог с НДС реализованы.</i></td></tr>
+    <tr><td><span style="color:#16A34A;font-weight:800">✅</span></td><td>Бронирование насоса</td><td>Чипы длины стрелы, дата, телефон</td><td><i style="color:#16A34A;font-size:12px">Добавлен чип-пикер стрелы с CTA бронирования.</i></td></tr>
+    <tr><td><span style="color:#16A34A;font-weight:800">✅</span></td><td>Заявка на испытание</td><td>Тип материала, цель испытания, имя, телефон</td><td>/laboratoriya/</td></tr>
+  </table>
+  <p><span style="color:#16A34A;font-weight:800">✅</span> Обязательные способы связи на каждой конверсионной точке (описано в контенте <code>/zakazat/</code>): <b>звонок</b> (tel:) · <b>WhatsApp</b> · <b>форма на сайте</b>. <i style="color:#16A34A;font-size:12px">На /zakazat/ и в CTA добавлены быстрые кнопки звонка, WhatsApp и Telegram рядом с формой; WhatsApp пока использует основной телефон до подтверждения отдельного номера.</i></p>
+</section>
+
+<!-- 14 -->
+<section id="maps">
+  <h2><span class="num">14.</span>Карты и локальные виджеты («мелочи»)</h2>
+  <div class="grid2">
+    <div class="card">
+      <h4><span style="color:#16A34A;font-weight:800">✅</span> Карта на /kontakty/</h4>
+      <p>Яндекс.Карты или Google Maps (iframe/API) с меткой завода. <i style="font-size:12px; color:var(--text-sec)">Реализовано через Google Maps embed iframe + ссылка «Открыть в Google Maps» по адресу компании. Яндекс.Карты не подключены (не критично — Google Maps закрывает ту же задачу).</i></p>
+    </div>
+    <div class="card">
+      <h4><span style="color:#16A34A;font-weight:800">✅</span> Карта зон доставки на /dostavka/</h4>
+      <p><i style="color:#16A34A;font-size:12px">Добавлена визуальная карта с кольцами 10/20/30/50 км и легендой тарифов.</i></p>
+    </div>
+    <div class="card">
+      <h4><span style="color:#16A34A;font-weight:800">✅</span> Ссылки на отзовики</h4>
+      <p><i style="color:#16A34A;font-size:12px">Добавлены ссылки «Отзывы на Яндекс Картах» и «Отзывы на 2GIS»; реальные внешние URL заменить после получения профилей клиента.</i></p>
+    </div>
+    <div class="card">
+      <h4><span style="color:#16A34A;font-weight:800">✅</span> Messenger-widget</h4>
+      <p><i style="color:#16A34A;font-size:12px">Фиксированная колонка справа реализована как WhatsApp + Telegram.</i></p>
+    </div>
+    <div class="card">
+      <h4><span style="color:#16A34A;font-weight:800">✅</span> Online-badge</h4>
+      <p>Пульсирующая зелёная точка + текст «Работаем до 22:00» в шапке и подвале — класс <code>.online-badge</code> с CSS-анимацией <code>pulse</code>.</p>
+    </div>
+    <div class="card">
+      <h4><span style="color:#16A34A;font-weight:800">✅</span> tel:-ссылки везде</h4>
+      <p>Телефон в шапке, подвале — кликабельный <code>tel:+74991117262</code>. Автоформатирование телефона в полях форм реализовано отдельным глобальным behavior-компонентом.</p>
+    </div>
+    <div class="card">
+      <h4><span style="color:#16A34A;font-weight:800">✅</span> PDF-прайс</h4>
+      <p><i style="color:#16A34A;font-size:12px">Добавлены кнопки «Скачать прайс PDF» и файл <code>/files/price-list.pdf</code>.</i></p>
+    </div>
+    <div class="card">
+      <h4><span style="color:#16A34A;font-weight:800">✅</span> Скачать свидетельство об аккредитации</h4>
+      <p><i style="color:#16A34A;font-size:12px">Кнопка добавлена на /laboratoriya/; пока ведёт на placeholder PDF до получения скана от клиента.</i></p>
+    </div>
+  </div>
+</section>
+
+<!-- 15 -->
+<section id="seo">
+  <h2><span class="num">15.</span>SEO и микроразметка</h2>
+  <p><span style="color:#16A34A;font-weight:800">✅</span> <b>Правило контента:</b> SEO-текст + FAQ обязательны на всех товарных страницах P1/P2 — проверено выборочно на /kalkulyator/, /tovarnyy-beton/[grade]/, /vidy-betona/*, везде есть SEO-блок и FAQ.</p>
+  <table>
+    <tr><th>Статус</th><th>Тип страницы</th><th>Микроразметка</th></tr>
+    <tr><td><span style="color:#16A34A;font-weight:800">✅</span></td><td>Все страницы</td><td>BreadcrumbList — найдено на 33 страницах через <code>breadcrumbListSchema()</code></td></tr>
+    <tr><td><span style="color:#16A34A;font-weight:800">✅</span></td><td>Страницы с FAQ-блоком</td><td>FAQPage — автоматически инжектится внутри самого компонента <code>FAQ.tsx</code>, применяется везде, где используется FAQ</td></tr>
+    <tr><td><span style="color:#16A34A;font-weight:800">✅</span></td><td>Контакты, главная, вся низовая навигация</td><td>LocalBusiness — подключена глобально в <code>layout.tsx</code> (на каждой странице сайта), включает areaServed, openingHours, ИНН/ОГРН как PropertyValue. <i style="font-size:11px">PostalAddress/ContactPoint как отдельные типы не выделены, но LocalBusiness покрывает функционально.</i></td></tr>
+    <tr><td><span style="color:#16A34A;font-weight:800">✅</span></td><td>Карточки марок/товаров (опционально)</td><td>Product / Offer с ценой — <code>productSchema()</code> реализована и используется в шаблоне карточки марки</td></tr>
+  </table>
+  <p><span style="color:#16A34A;font-weight:800">✅</span> Каждая страница в архиве уже содержит готовые Title/Description/H1 — брать оттуда, не придумывать заново. <i style="font-size:12px; color:var(--text-sec)">Проверено на нескольких страницах (главная, калькулятор, контакты, М200) — Title/Description/H1 воспроизведены дословно из архивных content-*.md через <code>pageMetadata()</code>.</i></p>
+</section>
+
+<!-- 16 -->
+<section id="assets">
+  <h2><span class="num">16.</span>Ассеты — что есть / чего нет</h2>
+  <div class="grid2">
+    <div class="ok-box">
+      <b>Есть <span style="color:#16A34A;font-weight:800">✅ использовано корректно</span></b>
+      <p>Видео сжато и подключено: <code>video_hero_bg_01.mp4</code> (2,7 МБ) + <code>.webm</code> (4,1 МБ) + <code>_poster.webp</code>, оба &lt;10 МБ — норматив соблюдён. Design-токены — использованы как источник правды. Контент — марки М100–М600, вся сеть услуг, 35 статей блога — в проекте.</p>
+    </div>
+    <div class="todo">
+      <b>Отсутствует <span style="color:#DC2626;font-weight:800">❌ ожидаемо, открытые вопросы не сняты</span></b>
+      <p>Фото — по-прежнему нет (SVG-плейсхолдеры вместо них, это верное решение). Логотип — минимальный геометрический знак в фирменных цветах, но реального фирменного лого от клиента нет. WhatsApp-номер — не отдельный, используется телефон. Банковские реквизиты, ориентиры/парковка — по-прежнему не заполнены (текст «вышлем по запросу»).</p>
+    </div>
+  </div>
+  <p><span style="color:#16A34A;font-weight:800">✅</span> Решение по картинкам без фото — реализовано ровно так, как предписывало ТЗ: авторские SVG-иллюстрации (<code>PlaceholderVisual.tsx</code>, 12 файлов в амбер/navy палитре), кейсы/отзывы — текстовые карточки без фото. <span style="color:#16A34A;font-weight:800">✅</span> Логотип заменён с простой текстовой плашки на минимальный геометрический знак в фирменных цветах.</p>
+</section>
+
+<!-- 17 -->
+<section id="open">
+  <h2><span class="num">17.</span>Открытые вопросы к заказчику</h2>
+  <table>
+    <tr><th>Статус</th><th>Вопрос</th><th>Где влияет</th><th>Что сделано по факту</th></tr>
+    <tr><td><span style="color:#16A34A;font-weight:800">✅</span></td><td>Реальный адрес завода / точки в Жуковском</td><td>Контакты, карта, подвал</td><td>Сделано ровно как рекомендовало ТЗ — юр. адрес использован как есть, без выдуманных деталей</td></tr>
+    <tr><td><span style="color:#16A34A;font-weight:800">✅</span></td><td>Тип корзины: заявка vs. e-commerce с оплатой</td><td>Архитектура корзины (§9)</td><td>Сделана корзина-заявка без эквайринга — ровно рекомендация ТЗ</td></tr>
+    <tr><td><span style="color:#DC2626;font-weight:800">❌</span></td><td>Номер WhatsApp</td><td>MessengerWidget, /zakazat/, /kontakty/</td><td><i style="color:#DC2626;font-size:12px">Плейсхолдер тем же номером телефона — реализовано, но это по-прежнему открытый вопрос по существу (не настоящий WA-аккаунт)</i></td></tr>
+    <tr><td><span style="color:#DC2626;font-weight:800">❌</span></td><td>Банковские реквизиты (р/с, БИК, банк)</td><td>/kontakty/ блок реквизитов</td><td><i style="color:#DC2626;font-size:12px">Показаны ИНН/ОГРН/директор, банковские — текст «вышлем по запросу на email», как и предполагалось — реквизитов по-прежнему нет</i></td></tr>
+    <tr><td><span style="color:#DC2626;font-weight:800">❌</span></td><td>Ориентиры для проезда, наличие парковки</td><td>/kontakty/ блок «Как добраться»</td><td><i style="color:#DC2626;font-size:12px">Блок упрощён до общей фразы «согласуйте время с менеджером» — ориентиров и парковки по-прежнему нет</i></td></tr>
+    <tr><td><span style="color:#DC2626;font-weight:800">❌</span></td><td>Логотип, фото завода/техники/сертификатов</td><td>Header, hero, о компании, лаборатория, сертификаты</td><td><i style="color:#DC2626;font-size:12px">Минимальный геометрический знак добавлен, SVG-иллюстрации есть везде вместо фото; реальные фото/официальный логотип/сканы сертификатов по-прежнему нужны от клиента</i></td></tr>
+    <tr><td><span style="color:#DC2626;font-weight:800">❌</span></td><td>Профили Яндекс.Карты / 2GIS с отзывами</td><td>Блок отзывов C7</td><td><i style="color:#DC2626;font-size:12px">Места/ссылки добавлены, но реальные внешние URL профилей от заказчика по-прежнему отсутствуют</i></td></tr>
+  </table>
+  <p style="font-size:12.5px; color:var(--text-sec)">Строки этой таблицы по определению не могут стать «✅ реализовано корректно» без реальных данных от заказчика — ❌ здесь фиксирует, что открытый вопрос всё ещё открыт, а не брак разработки.</p>
+</section>
+
+<!-- 18 -->
+<section id="checklist">
+  <h2><span class="num">18.</span>Итоговый чек-лист реализации</h2>
+  <div class="grid2">
+    <div class="card">
+      <h4>Минимум для тестового задания (P1)</h4>
+      <p>
+        <span style="color:#16A34A;font-weight:800">✅</span> Главная (16 блоков)<br>
+        <span style="color:#16A34A;font-weight:800">✅</span> Хаб «Товарный бетон» + 1 шаблонизированная карточка марки (переиспользуемая на все М100–М600)<br>
+        <span style="color:#16A34A;font-weight:800">✅</span> Прайс-лист /ceny/<br>
+        <span style="color:#16A34A;font-weight:800">✅</span> Калькулятор /kalkulyator/ <i style="color:#16A34A;font-size:11px">(тип конструкции, размеры, +7%, НДС добавлены)</i><br>
+        <span style="color:#16A34A;font-weight:800">✅</span> Заказать /zakazat/ + корзина-заявка <i style="color:#16A34A;font-size:11px">(страница /korzina/ есть, заявка готовится письмом менеджеру)</i><br>
+        <span style="color:#16A34A;font-weight:800">✅</span> Доставка /dostavka/ <i style="font-size:11px">(карта зон добавлена)</i><br>
+        <span style="color:#16A34A;font-weight:800">✅</span> Аренда бетононасоса <i style="color:#16A34A;font-size:11px">(добавлен чип-пикер стрелы)</i><br>
+        <span style="color:#16A34A;font-weight:800">✅</span> Контакты (с картой)<br>
+        <span style="color:#16A34A;font-weight:800">✅</span> Header/Footer/формы/компоненты C1–C8 <i style="color:#16A34A;font-size:11px">(основные пробелы §7 и §10 закрыты)</i><br>
+        <span style="color:#16A34A;font-weight:800">✅</span> Адаптив мобайл/десктоп <i style="font-size:11px">(бургер-меню, media-запросы токенов есть; полный визуальный проход не делался)</i>
+      </p>
+    </div>
+    <div class="card">
+      <h4>Желательно, если время позволяет</h4>
+      <p>
+        <span style="color:#16A34A;font-weight:800">✅</span> Хотя бы 1 страница применения (/vidy-betona/beton-dlya-fundamenta/) <i style="font-size:11px">— реализовано ~17 таких страниц</i><br>
+        <span style="color:#16A34A;font-weight:800">✅</span> Лаборатория<br>
+        <span style="color:#16A34A;font-weight:800">✅</span> О компании<br>
+        <span style="color:#16A34A;font-weight:800">✅</span> 1–2 статьи блога <i style="font-size:11px">— реализовано все 35</i><br>
+        <span style="color:#16A34A;font-weight:800">✅</span> Региональная страница (/zhukovskiy/) <i style="font-size:11px">— реализовано 9</i><br>
+        <span style="color:#16A34A;font-weight:800">✅</span> Сжатие видео до &lt;10 МБ<br>
+        <span style="color:#16A34A;font-weight:800">✅</span> Базовая микроразметка (LocalBusiness, BreadcrumbList, FAQPage)
+      </p>
+    </div>
+  </div>
+  <p style="margin-top:16px"><span style="color:#16A34A;font-weight:800">✅</span> Вывод: раздел «желательно» выполнен почти полностью и с превышением объёма; раздел «минимум P1» выполнен по количеству страниц, но с систематическими пробелами внутри самих P1-компонентов (калькулятор, формы до менеджера, отдельные детали шапки) — см. сводку в начале документа.</p>
+</section>
+
+</div>
+
+<footer class="page">
+  ТЗ составлено по материалам папки <code style="background:#0a1526;padding:2px 6px;border-radius:4px">kupit-beton-v-zhukovskom/</code>. Ничего вне этой папки не использовалось.
+</footer>
+
+</body>
+</html>

@@ -1,4 +1,5 @@
 import { LeadForm } from './LeadForm';
+import { ContactActions } from './ContactActions';
 import { company } from '@/data/site';
 import styles from './FinalCTA.module.css';
 
@@ -39,6 +40,7 @@ export function FinalCTA({ title = 'Рассчитайте стоимость и
               <span className={styles.value}>Жуковский и Раменский округ</span>
             </li>
           </ul>
+          <ContactActions compact />
         </div>
 
         <div className={styles.form}>

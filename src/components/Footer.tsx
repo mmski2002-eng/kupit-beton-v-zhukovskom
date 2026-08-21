@@ -58,7 +58,7 @@ export function Footer() {
         <div>
           <div className={styles.logo}>
             <span className={styles.logoMark} aria-hidden="true">
-              ПСК
+              <span></span>
             </span>
             <span className={styles.logoName}>Прогресс</span>
           </div>
@@ -91,8 +91,8 @@ export function Footer() {
 
       <div className={`container ${styles.bottom}`}>
         <p>
-          © {company.since}–2026 {company.legalName} · ИНН {company.inn} · ОГРН {company.ogrn} · Юр. адрес:{' '}
-          {company.addressFull}
+          © {company.since}–2026 {company.legalName} · ИНН {company.inn} · КПП {company.kpp} · ОГРН {company.ogrn} ·
+          Юр. адрес: {company.addressFull}
         </p>
         <p className={styles.legal}>
           <a href="/politika-konfidencialnosti/">Политика конфиденциальности</a>

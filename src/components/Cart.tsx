@@ -2,15 +2,23 @@
 
 import { useEffect, useState, type FormEvent } from 'react';
 import { useCart } from '@/context/CartContext';
+import { company, deliverySteps } from '@/data/site';
 import styles from './Cart.module.css';
 
 function formatPrice(value: number) {
   return `${Math.round(value).toLocaleString('ru-RU')} ₽`;
 }
 
+function rateForKm(km: number): number {
+  const step = deliverySteps.find((s) => km <= s.maxKm);
+  return step ? step.rate : deliverySteps[deliverySteps.length - 1]!.rate;
+}
+
 export function Cart() {
   const { items, total, isOpen, closeCart, updateVolume, removeItem, clear } = useCart();
   const [status, setStatus] = useState<string | null>(null);
+  const [deliveryMode, setDeliveryMode] = useState<'free' | 'km'>('free');
+  const [km, setKm] = useState(10);
 
   useEffect(() => {
     function onKeyDown(event: KeyboardEvent) {
@@ -24,10 +32,34 @@ export function Cart() {
     event.preventDefault();
     const form = event.currentTarget;
     if (!form.reportValidity()) return;
-    setStatus(`Заявка на ${items.length} позиций (${formatPrice(total)}) принята. Диспетчер перезвонит в течение 15 минут.`);
+    const data = new FormData(form);
+    const positions = items.map((item) => `${item.material} · ${item.grade}: ${item.volume} м³ × ${formatPrice(item.price)} = ${formatPrice(item.price * item.volume)}`);
+    const lines = [
+      'Новая заявка из корзины сайта kupit-beton-v-zhukovskom.ru',
+      '',
+      'Позиции:',
+      ...positions,
+      '',
+      `Итого без НДС: ${formatPrice(totalWithoutVat)}`,
+      `НДС 20%: ${formatPrice(vat)}`,
+      `Бетон с НДС: ${formatPrice(total)}`,
+      `Доставка: ${deliveryPrice === 0 ? 'Бесплатно' : formatPrice(deliveryPrice)}`,
+      `Итого с доставкой: ${formatPrice(grandTotal)}`,
+      '',
+      ...Array.from(data.entries()).map(([key, value]) => `${key}: ${value}`),
+    ];
+    window.location.assign(`mailto:${company.email}?subject=${encodeURIComponent('Заявка из корзины сайта')}&body=${encodeURIComponent(lines.join('\n'))}`);
+    setStatus(`Заявка на ${items.length} позиций (${formatPrice(grandTotal)}) подготовлена письмом менеджеру. Диспетчер перезвонит в течение 15 минут.`);
     form.reset();
     clear();
   }
+
+  const totalVolume = items.reduce((sum, item) => sum + item.volume, 0);
+  const deliveryRate = deliveryMode === 'free' ? 0 : rateForKm(Math.max(1, km || 1));
+  const deliveryPrice = deliveryRate * totalVolume;
+  const totalWithoutVat = total / 1.2;
+  const vat = total - totalWithoutVat;
+  const grandTotal = total + deliveryPrice;
 
   return (
     <div>
@@ -85,11 +117,53 @@ export function Cart() {
 
           {items.length > 0 && (
             <div className={styles.summary}>
+              <div className={styles.deliveryBox}>
+                <span className="field__label">Доставка</span>
+                <div className={styles.deliveryBtns}>
+                  <button
+                    type="button"
+                    className={`${styles.deliveryBtn} ${deliveryMode === 'free' ? styles.deliveryBtnActive : ''}`}
+                    onClick={() => setDeliveryMode('free')}
+                  >
+                    Раменский район
+                  </button>
+                  <button
+                    type="button"
+                    className={`${styles.deliveryBtn} ${deliveryMode === 'km' ? styles.deliveryBtnActive : ''}`}
+                    onClick={() => setDeliveryMode('km')}
+                  >
+                    Другой адрес
+                  </button>
+                </div>
+                {deliveryMode === 'km' && (
+                  <label className={styles.kmField}>
+                    <span>км от завода</span>
+                    <input type="number" min={1} max={50} step={1} value={km} onChange={(e) => setKm(Number(e.target.value))} />
+                  </label>
+                )}
+              </div>
+
               <div className={styles.total}>
-                <span>Итого по позициям</span>
+                <span>Итого без НДС</span>
+                <b>{formatPrice(totalWithoutVat)}</b>
+              </div>
+              <div className={styles.total}>
+                <span>НДС 20%</span>
+                <b>{formatPrice(vat)}</b>
+              </div>
+              <div className={styles.total}>
+                <span>Бетон с НДС</span>
                 <b>{formatPrice(total)}</b>
               </div>
-              <p className="form-note">Точную сумму с учётом доставки назовёт диспетчер после уточнения адреса.</p>
+              <div className={styles.total}>
+                <span>Доставка</span>
+                <b>{deliveryPrice === 0 ? 'Бесплатно' : formatPrice(deliveryPrice)}</b>
+              </div>
+              <div className={`${styles.total} ${styles.grandTotal}`}>
+                <span>Итого с доставкой</span>
+                <b>{formatPrice(grandTotal)}</b>
+              </div>
+              <p className="form-note">Цены в прайсе указаны с НДС. Финальную сумму подтвердит диспетчер после проверки адреса.</p>
 
               <form className={styles.form} onSubmit={onSubmit} noValidate>
                 <label className="field">
@@ -115,6 +189,22 @@ export function Cart() {
                 <label className="field">
                   <span className="field__label">Дата доставки</span>
                   <input type="date" name="date" />
+                </label>
+                <label className="field">
+                  <span className="field__label">Время доставки</span>
+                  <input type="time" name="time" min="08:00" max="22:00" />
+                </label>
+                <label className="field">
+                  <span className="field__label">Тип заказчика *</span>
+                  <select name="customerType" required>
+                    <option value="Физлицо">Физлицо</option>
+                    <option value="Юрлицо">Юрлицо</option>
+                    <option value="ИП">ИП</option>
+                  </select>
+                </label>
+                <label className="field">
+                  <span className="field__label">Компания</span>
+                  <input type="text" name="company" placeholder="для юрлиц и ИП" />
                 </label>
                 <label className="field">
                   <span className="field__label">Комментарий</span>

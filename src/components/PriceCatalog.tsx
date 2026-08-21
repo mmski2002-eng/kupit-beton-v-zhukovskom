@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { priceTabs } from '@/data/site';
+import { downloads, priceTabs } from '@/data/site';
 import { useCart } from '@/context/CartContext';
 import styles from './PriceCatalog.module.css';
 
@@ -106,6 +106,9 @@ export function PriceCatalog({
               {footerLink.label}
             </a>
           )}
+          <a className="btn btn--ghost" href={downloads.pricePdf} download>
+            Скачать полный прайс PDF
+          </a>
         </div>
       </div>
     </section>
